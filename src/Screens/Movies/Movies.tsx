@@ -7,22 +7,13 @@ import { useFocusEffect } from '@react-navigation/native';
 import { API_DATABASE, API_KEY } from '../../Constants/api';
 import { MovieCard } from '../../Components/MovieCard/MovieCard';
 import { FontAwesome5 } from 'react-native-vector-icons'
+import { MovieType } from '../../interfaces';
 
 
 export function Movies({ navigation }: any) {
 
-    const [onFocus, setOnFocus] = useState(false);
-    const [topMovies, setTopMovies] = useState([]);
+    const [topMovies, setTopMovies] = useState<MovieType[] | []>([])
     const [search, setSearch] = useState('');
-
-    useFocusEffect(
-        React.useCallback(() => {
-            setOnFocus(true);
-            return () => {
-                setOnFocus(false);
-            };
-        }, [])
-    );
 
     const getTopRatedMovies = async (url: any) => {
 
@@ -36,7 +27,6 @@ export function Movies({ navigation }: any) {
         getTopRatedMovies(topRatedUrl)
 
     }, [])
-
 
     const handleSubmit = () => {
         if (search) {
@@ -73,8 +63,13 @@ export function Movies({ navigation }: any) {
             <Text
                 style={styles.textTitle}
             >Melhores Filmes</Text>
+
+
             {topMovies.length === 0 && <Text>Carregando...</Text>}
-            <MovieCard key={topMovies.id} movie={topMovies} />
+
+            {topMovies.length > 0 && topMovies && <MovieCard key={topMovies[0].id} movie={topMovies} />}
+
+
 
             <View
                 style={styles.buttonContainer}

@@ -10,10 +10,10 @@ export const styles = StyleSheet.create({
     },
     inputContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        width: '50%',
+        justifyContent: "space-around",
+        width: '90%',
         alignSelf: 'flex-end',
-        margin: 10
+        margin: '5%',
     },
     input: {
         backgroundColor: "#fff",
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     },
     searchContainer: {
         backgroundColor: "#f7d354",
-        width: 30,
+        width: "20%",
         height: 30,
         alignItems: "center",
         justifyContent: 'center',
