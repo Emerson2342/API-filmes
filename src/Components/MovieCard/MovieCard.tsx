@@ -1,51 +1,70 @@
-import React from 'react';
-import { View, Image, Text, FlatList, } from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, Text, FlatList, Modal } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons'
 
 import { styles } from './MovieCardStyles';
 import { API_IMAGE } from '../../Constants/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { MovieDetails } from '../Modals/MovieDetails';
 
+export function MovieCard({ movie }: any) {
 
-
-
-export function MovieCard({ movie, showLink = true }: any) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [idMovie, setIdMovie] = useState(0);
+    const [year, setYear] = useState(0);
 
     const renderItem = ({ item }: any) => {
+        const releaseDate = item.release_date || "Data indisponível";
+        const year = releaseDate.split("-")[0];
+
+
         return (
             <View style={styles.container} >
-                <Image
-                    style={styles.imagePoster}
-                    src={API_IMAGE + item.poster_path}
-                />
-                <View
-
-                    style={{ width: '100%' }}
-                >
-                    <Text
-                        style={styles.textTitle}
-                    >{item.title}</Text>
+                <View style={styles.list}>
+                    <Image
+                        style={styles.imagePoster}
+                        src={API_IMAGE + item.poster_path}
+                    />
                     <View
-                        style={styles.movieAverage}
+                        style={{ width: '98%' }}
                     >
-                        <AntDesign name='star' color='#f7d354' />
                         <Text
-                            style={{ color: "#fff" }}
-                        >{item.vote_average}</Text>
-                    </View>
-                    <View
-                        style={styles.detalhesButton}
-                    >
-                        <TouchableOpacity
-                            onPress={() => alert('sdfadsf')}
-                            style={styles.button}
-                        // {showLink && <Link to={`/movies/${item.id}`} >Detalhes</Link>}
+                            style={styles.textTitle}
+                        >{item.title}</Text>
+                        <Text
+                            style={{
+                                color: "#fff",
+                                textAlign: 'center',
+                                width: "70%"
+                            }}
+                        > Ano: {year}</Text>
+                        <View
+                            style={styles.movieAverage}
                         >
+                            <AntDesign name='star' color='#f7d354' />
                             <Text
-                                style={styles.detalhesText}
-                            >Detalhes</Text>
-                        </TouchableOpacity>
+                                style={{ color: "#fff" }}
+                            >{item.vote_average}</Text>
+
+                        </View>
+
                     </View>
+                </View>
+                <View
+                    style={{ width: '80%', padding: 5 }}
+                >
+                    <TouchableOpacity
+                        onPress={() => {
+                            setModalVisible(true);
+                            setIdMovie(item.id);
+                            setYear(year);
+
+                        }}
+                        style={styles.button}
+                    >
+                        <Text
+                        >Detalhes</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -61,7 +80,16 @@ export function MovieCard({ movie, showLink = true }: any) {
                 keyExtractor={(item) => item.id.toString()}
             />
 
-
+            <Modal
+                transparent={true}
+                visible={modalVisible}
+            >
+                <MovieDetails
+                    handleClose={() => setModalVisible(false)}
+                    id={idMovie}
+                    year={year}
+                />
+            </Modal>
         </View>
     );
 }

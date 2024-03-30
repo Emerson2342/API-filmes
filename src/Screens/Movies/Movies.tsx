@@ -7,7 +7,6 @@ import { useFocusEffect } from '@react-navigation/native';
 import { API_DATABASE, API_KEY } from '../../Constants/api';
 import { MovieCard } from '../../Components/MovieCard/MovieCard';
 import { FontAwesome5 } from 'react-native-vector-icons'
-import { ModalBuscaDeFilmes } from '../../Components/Modals/BuscaDeFilmes';
 
 
 export function Movies({ navigation }: any) {
@@ -15,7 +14,6 @@ export function Movies({ navigation }: any) {
     const [onFocus, setOnFocus] = useState(false);
     const [topMovies, setTopMovies] = useState([]);
     const [search, setSearch] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
 
     useFocusEffect(
         React.useCallback(() => {
@@ -34,7 +32,7 @@ export function Movies({ navigation }: any) {
     }
 
     useEffect(() => {
-        const topRatedUrl = `${API_DATABASE}top_rated?${API_KEY}`;
+        const topRatedUrl = `${API_DATABASE}top_rated?${API_KEY}&language=pt-BR`;
         getTopRatedMovies(topRatedUrl)
 
     }, [])
@@ -42,13 +40,12 @@ export function Movies({ navigation }: any) {
 
     const handleSubmit = () => {
         if (search) {
-            (setModalVisible(true))
+            navigation.navigate("buscaFilmes", { busca: search })
             console.log('Filme digitado:', search);
+            setSearch('')
         } else (
             alert("Favor Digitar um filme")
         )
-
-
     };
 
     return (
@@ -56,7 +53,6 @@ export function Movies({ navigation }: any) {
             <View
                 style={{ width: "100%" }}
             >
-
                 <View
                     style={styles.inputContainer}
                 >
@@ -79,21 +75,28 @@ export function Movies({ navigation }: any) {
             >Melhores Filmes</Text>
             {topMovies.length === 0 && <Text>Carregando...</Text>}
             <MovieCard key={topMovies.id} movie={topMovies} />
-            <TabBar navigation={navigation} focusMovies={onFocus} />
 
-            <Modal
-                transparent={true}
-                visible={modalVisible}
-                animationType='fade'
+            <View
+                style={styles.buttonContainer}
             >
-                <ModalBuscaDeFilmes
-                    handleClose={() => {
-                        setSearch('');
-                        setModalVisible(false)
-                    }}
-                    search={search}
-                />
-            </Modal>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("home")}
+                >
+                    <Text
+                        style={styles.textButton}
+                    >Home</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("tvshows")}
+                >
+                    <Text
+                        style={styles.textButton}
+                    >Séries</Text>
+                </TouchableOpacity>
+            </View>
+
         </View>
     );
 }

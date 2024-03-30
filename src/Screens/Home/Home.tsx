@@ -39,8 +39,16 @@ export function Home({ navigation }: any) {
                     src='https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg'
                 />
             </View>
-
-            <TabBar navigation={navigation} focusHome={onFocus} />
+            <TouchableOpacity
+                onPress={() => navigation.navigate("movies")}
+            >
+                <Text>Filmes</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={() => navigation.navigate("tvshows")}
+            >
+                <Text>Séries</Text>
+            </TouchableOpacity>
 
         </View>
     );
