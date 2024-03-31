@@ -3,6 +3,7 @@ import { Home } from "./Screens/Home/Home";
 import { Movies } from "./Screens/Movies/Movies";
 import { TVShows } from "./Screens/TVShows/TVShows";
 import { BuscaDeFilmes } from "./Screens/Movies/BuscaFilmes/BuscaDeFilmes";
+import { BuscaDeSeries } from "./Screens/TVShows/BuscaDeSeries";
 
 
 const { Screen, Navigator } = createStackNavigator();
@@ -36,11 +37,19 @@ export function Routes() {
                     headerShown: false,
                     ...TransitionPresets.SlideFromRightIOS
                 }}
-
             />
+
             <Screen
                 name="tvshows"
                 component={TVShows}
+                options={{
+                    headerShown: false,
+                    ...TransitionPresets.SlideFromRightIOS
+                }}
+            />
+            <Screen
+                name="buscaSeries"
+                component={BuscaDeSeries}
                 options={{
                     headerShown: false,
                     ...TransitionPresets.SlideFromRightIOS

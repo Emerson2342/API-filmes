@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { MovieCard } from '../../../Components/MovieCard/MovieCard';
-import { API_KEY, API_SEARCH_MOVIE } from '../../../Constants/api';
-import { MovieType } from '../../../interfaces';
+import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
+import { API_KEY, API_SEARCH_TVSHOW } from '../../Constants/api';
+import { MovieType } from '../../interfaces';
 
 
-
-export function BuscaDeFilmes({ navigation, route }: { navigation: any, route: any }) {
+export function BuscaDeSeries({ navigation, route }: { navigation: any, route: any }) {
     const { busca } = route.params;
 
 
-    const [movies, setMovies] = useState<MovieType[]>([]);
-    const getSearchedMovies = async (url: any) => {
+    const [tvShows, setTvShows] = useState<MovieType[]>([]);
+    const getSearchedTvShows = async (url: any) => {
 
         const response = await fetch(url);
         const data = await response.json();
-        setMovies(data.results);
+        setTvShows(data.results);
     }
 
     useEffect(() => {
-        const searchWithURL = `${API_SEARCH_MOVIE}?${API_KEY}&query=${busca}&language=pt-BR`;
+        const searchWithURL = `${API_SEARCH_TVSHOW}?${API_KEY}&query=${busca}&language=pt-BR`;
         console.log(searchWithURL)
 
-        getSearchedMovies(searchWithURL)
+        getSearchedTvShows(searchWithURL)
 
     }, [])
 
@@ -39,13 +38,15 @@ export function BuscaDeFilmes({ navigation, route }: { navigation: any, route: a
                     style={[styles.text, { color: "#f7d354" }]}
                 >{busca}</Text>
             </View>
-            {movies.length === 0 && <Text
+            {tvShows.length === 0 && <Text
                 style={styles.text}
             >Carregando...</Text>}
-            {movies.length > 0 && movies && <MovieCard key={movies[0].id} movie={movies} />}
+
+            {tvShows.length > 0 && tvShows && <TvShowCard key={tvShows[0].id} tvShow={tvShows} />}
+
 
             <TouchableOpacity
-                onPress={() => navigation.navigate("movies")}
+                onPress={() => navigation.navigate("tvshows")}
                 style={styles.buttonContent}
             >
                 <Text
@@ -60,6 +61,7 @@ export function BuscaDeFilmes({ navigation, route }: { navigation: any, route: a
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 40,
         alignItems: 'center',
         backgroundColor: "rgba(0,150,150,0.5)",
         padding: 5,
@@ -72,11 +74,11 @@ const styles = StyleSheet.create({
 
     buttonContent: {
         marginTop: 15,
-        borderWidth: 1,
         backgroundColor: "#fff",
         width: '50%',
         padding: 5,
         borderRadius: 5,
+        borderWidth: 1,
         alignItems: 'center'
     },
     textButton: {

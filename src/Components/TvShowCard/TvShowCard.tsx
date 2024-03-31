@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import { View, Image, Text, FlatList, Modal } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons'
 
-import { styles } from './MovieCardStyles';
+import { styles } from './TvShowCardStyles';
 import { API_IMAGE } from '../../Constants/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { MovieDetails } from '../Modals/MovieDetails';
+import { TvShowDetails } from '../Modals/TvShowDetails';
 
-export function MovieCard({ movie }: any) {
+export function TvShowCard({ tvShow }: any) {
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [idMovie, setIdMovie] = useState(0);
-    const [yearMovie, setYearMovie] = useState(0);
+    const [idTvShow, setIdTvShow] = useState(0);
+    const [year, setYear] = useState(0);
 
     const renderItem = ({ item }: any) => {
 
-        const relaseMovie = item.release_date;
-        const yearMovie = relaseMovie.split("-")[0];
+        const relaseTvShow = item.first_air_date || "Indisponível";
+        const yearTvShow = relaseTvShow.split("-")[0];
 
 
 
@@ -32,14 +32,14 @@ export function MovieCard({ movie }: any) {
                     >
                         <Text
                             style={styles.textTitle}
-                        >{item.title}</Text>
+                        >{item.name}</Text>
                         <Text
                             style={{
                                 color: "#fff",
                                 textAlign: 'center',
                                 width: "70%"
                             }}
-                        > Ano: {yearMovie}</Text>
+                        > Ano: {yearTvShow}</Text>
                         <View
                             style={styles.movieAverage}
                         >
@@ -58,8 +58,8 @@ export function MovieCard({ movie }: any) {
                     <TouchableOpacity
                         onPress={() => {
                             setModalVisible(true);
-                            setIdMovie(item.id);
-                            setYearMovie(yearMovie);
+                            setIdTvShow(item.id);
+                            setYear(yearTvShow);
 
                         }}
                         style={styles.button}
@@ -76,7 +76,7 @@ export function MovieCard({ movie }: any) {
         <View >
             <FlatList
                 style={{ maxHeight: 600 }}
-                data={movie}
+                data={tvShow}
                 numColumns={2}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
@@ -86,10 +86,10 @@ export function MovieCard({ movie }: any) {
                 transparent={true}
                 visible={modalVisible}
             >
-                <MovieDetails
+                <TvShowDetails
                     handleClose={() => setModalVisible(false)}
-                    id={idMovie}
-                    year={yearMovie}
+                    id={idTvShow}
+                    year={year}
                 />
             </Modal>
         </View>

@@ -18,5 +18,15 @@ export interface MovieType {
     genres:{name:string}[];
     revenue:number;
     tagline:string;
+    original_name:string;
+    first_air_date:string;
+    episode_run_time:number;
+    number_of_seasons:number;
+    number_of_episodes:number;
+    status:string;
+    name:string;
+    last_air_date:any;
+   
+    
     
 }
