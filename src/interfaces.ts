@@ -18,4 +18,5 @@ export interface MovieType {
     genres:{name:string}[];
     revenue:number;
     tagline:string;
+    
 }

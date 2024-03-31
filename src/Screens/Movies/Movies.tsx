@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Modal, KeyboardAvoidingView } from 'react-native';
 
 import { styles } from './MoviesStyles';
-import { TabBar } from '../../Components/TabBar/TabBar';
 import { useFocusEffect } from '@react-navigation/native';
 import { API_DATABASE, API_KEY } from '../../Constants/api';
 import { MovieCard } from '../../Components/MovieCard/MovieCard';
