@@ -3,9 +3,17 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
-        backgroundColor: "rgba(0,150,150,0.5)"
+        backgroundColor: "#fff"
 
+    },
+    subtitulo: {
+        textAlign: 'center',
+        padding: 10, fontSize: 20,
+        fontStyle: 'italic'
+    },
+    content: {
+        flex: 1,
+        top: 35
     },
     imagePoster: {
         width: 90,
@@ -17,9 +25,7 @@ export const styles = StyleSheet.create({
         borderColor: "rgb(0,110,150)",
         resizeMode: 'contain',
     },
-    postersMovies: {
 
-    },
     titleMovie: {
         fontWeight: "bold",
         textAlign: "center",
@@ -28,12 +34,13 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        bottom: 10,
-        width: '80%',
+        height: 50,
+        width: '100%',
         alignSelf: "center",
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'flex-end',
+        backgroundColor: "#00C8BE"
 
 
     },
@@ -41,7 +48,8 @@ export const styles = StyleSheet.create({
         backgroundColor: "#fff",
         padding: 5,
         width: "40%",
-        alignSelf: "flex-end",
+        alignSelf: "center",
+        margin: 10,
         borderRadius: 5,
         borderWidth: 1
     },

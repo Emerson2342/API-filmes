@@ -35,7 +35,7 @@ export function MovieCard({ movie }: any) {
                         >{item.title}</Text>
                         <Text
                             style={{
-                                color: "#fff",
+                                color: "#000",
                                 textAlign: 'center',
                                 width: "70%"
                             }}
@@ -45,7 +45,7 @@ export function MovieCard({ movie }: any) {
                         >
                             <AntDesign name='star' color='#f7d354' />
                             <Text
-                                style={{ color: "#fff" }}
+                                style={{ color: "#000" }}
                             >{item.vote_average}</Text>
 
                         </View>
@@ -73,9 +73,10 @@ export function MovieCard({ movie }: any) {
     }
 
     return (
-        <View >
+        <View
+        >
             <FlatList
-                style={{ maxHeight: 600 }}
+
                 data={movie}
                 numColumns={2}
                 renderItem={renderItem}

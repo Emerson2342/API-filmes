@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        paddingTop: 10,
-        alignItems: "center",
-        backgroundColor: "rgba(0, 150, 150, 0.3)",
-        flex: 1
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 30,
+        backgroundColor: '#fff',
+
     },
     inputContainer: {
         flexDirection: "row",
@@ -32,26 +33,28 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5,
         borderWidth: 1
-
     },
     textTitle: {
-        //  color: "#fff",
+        top: -20,
         fontSize: 30,
         fontWeight: "bold"
     },
     buttonContainer: {
-        paddingTop: 10,
-        width: '90%',
+
+        width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#00C8BE',
+        padding: 10
     },
     button: {
         backgroundColor: "#fff",
         padding: 5,
         width: "40%",
-        alignSelf: "center",
         borderRadius: 5,
-        borderWidth: 1
+        borderWidth: 1,
+
     },
     textButton: {
         textAlign: "center",

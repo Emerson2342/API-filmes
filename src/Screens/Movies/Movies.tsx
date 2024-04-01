@@ -6,6 +6,7 @@ import { API_DATABASE, API_KEY } from '../../Constants/api';
 import { MovieCard } from '../../Components/MovieCard/MovieCard';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { MovieType } from '../../interfaces';
+import { WaveBottomMovies, WaveTop } from '../../Components/CustomLines/Wave';
 
 
 export function Movies({ navigation }: any) {
@@ -21,7 +22,7 @@ export function Movies({ navigation }: any) {
     }
 
     useEffect(() => {
-        const topRatedUrl = `${API_DATABASE}top_rated?${API_KEY}&language=pt-BR`;
+        const topRatedUrl = `${API_DATABASE}`;
         getTopRatedMovies(topRatedUrl)
 
     }, [])
@@ -38,6 +39,11 @@ export function Movies({ navigation }: any) {
 
     return (
         <View style={styles.container}>
+            <View
+                style={{ top: -230, alignSelf: 'stretch' }}
+            >
+                <WaveTop />
+            </View>
             <View
                 style={{ width: "100%" }}
             >
@@ -62,33 +68,43 @@ export function Movies({ navigation }: any) {
                 style={styles.textTitle}
             >Melhores Filmes</Text>
 
+            <View
+                style={{ top: 200, height: 520, position: "absolute" }}
+            >
+                {topMovies.length === 0 && <Text>Carregando...</Text>}
 
-            {topMovies.length === 0 && <Text>Carregando...</Text>}
-
-            {topMovies.length > 0 && topMovies && <MovieCard key={topMovies[0].id} movie={topMovies} />}
-
-
+                {topMovies.length > 0 && topMovies && <MovieCard key={topMovies[0].id} movie={topMovies} />}
+            </View>
 
             <View
-                style={styles.buttonContainer}
+                style={{ flex: 1, justifyContent: "flex-end", }}
             >
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("home")}
+                <WaveBottomMovies
+                />
+
+                <View
+                    style={styles.buttonContainer}
                 >
-                    <Text
-                        style={styles.textButton}
-                    >Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("tvshows")}
-                >
-                    <Text
-                        style={styles.textButton}
-                    >Séries</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("home")}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("tvshows")}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Séries</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
+
 
         </View>
     );

@@ -6,6 +6,7 @@ import { API_POPULAR_TVSHOWS } from '../../Constants/api';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { MovieType } from '../../interfaces';
 import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
+import { WaveBottomMovies, WaveTop } from '../../Components/CustomLines/Wave';
 
 export function TVShows({ navigation }: any) {
 
@@ -41,6 +42,11 @@ export function TVShows({ navigation }: any) {
     return (
         <View style={styles.container}>
             <View
+                style={{ top: -230, alignSelf: 'stretch' }}
+            >
+                <WaveTop />
+            </View>
+            <View
                 style={{ width: "100%" }}
             >
                 <View
@@ -63,29 +69,39 @@ export function TVShows({ navigation }: any) {
             <Text
                 style={styles.textTitle}
             >Melhores Séries de TV</Text>
-            {topTvShows.length === 0 && <Text>Carregando...</Text>}
-
-            {topTvShows.length > 0 && topTvShows && <TvShowCard key={topTvShows[0].id} tvShow={topTvShows} />}
-
             <View
-                style={styles.buttonContainer}
+                style={{ top: 200, height: 520, position: "absolute" }}
             >
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("home")}
+                {topTvShows.length === 0 && <Text>Carregando...</Text>}
+
+                {topTvShows.length > 0 && topTvShows && <TvShowCard key={topTvShows[0].id} tvShow={topTvShows} />}
+            </View>
+            <View
+                style={{ flex: 1, justifyContent: "flex-end", }}
+            >
+                <WaveBottomMovies
+                />
+
+                <View
+                    style={styles.buttonContainer}
                 >
-                    <Text
-                        style={styles.textButton}
-                    >Home</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => navigation.navigate("movies")}
-                >
-                    <Text
-                        style={styles.textButton}
-                    >Filmes</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("home")}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Home</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("movies")}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Filmes</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
         </View>

@@ -5,12 +5,12 @@ export const styles = StyleSheet.create({
         width: "48%",
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderColor: "#000",
-        marginVertical: 2,
-        marginHorizontal: 2,
+        marginVertical: 5,
+        marginHorizontal: 5,
         borderRadius: 3,
-        backgroundColor: "rgba(0, 0, 0, 0.7)"
+        elevation: 10,
+        backgroundColor: '#ffff'
+
     },
     list: {
         flexDirection: 'row',
@@ -24,14 +24,13 @@ export const styles = StyleSheet.create({
         height: 90,
         borderRadius: 5,
         alignSelf: "center",
-        // resizeMode: 'contain',
     },
     textTitle: {
         fontWeight: "bold",
         padding: 1,
         textAlign: 'center',
         width: "70%",
-        color: '#fff'
+        color: '#000'
     },
     movieAverage: {
         flexDirection: 'row',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { API_DATABASE, API_IMAGE, API_KEY } from "../../Constants/api";
+import { API_DATABASE, API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
 import { MovieType } from "../../interfaces";
 
 export function MovieDetails({ handleClose, id, year }: any) {
@@ -10,14 +10,14 @@ export function MovieDetails({ handleClose, id, year }: any) {
     const getMovie = async (url: any) => {
         const res = await fetch(url);
         const data = await res.json();
-
         setMovie(data);
     }
 
     useEffect(() => {
-        const movieURL = `${API_DATABASE}${id}?${API_KEY}&language=pt-BR`
+        const movieURL = `${API_SEARCH_MOVIE_ID}${id}?${API_KEY}&language=pt-BR`
         getMovie(movieURL)
         console.log(movieURL)
+        console.log(JSON.stringify(movie, null, 2))
 
     }, [])
 
@@ -37,8 +37,8 @@ export function MovieDetails({ handleClose, id, year }: any) {
                 <View
                     style={{ padding: 10 }}
                 >
-                    <Text>Orçamento: {formattedBudget}</Text>
-                    <Text>Receita: {formattedRevenue}</Text>
+                    <Text>Orçamento: {movie?.budget}</Text>
+                    <Text>Receita: {movie?.revenue}</Text>
 
                     <Text>Duração: {movie?.runtime} min</Text>
                     <Text>Gêneros: {movie && movie.genres.map((genre, index) => (

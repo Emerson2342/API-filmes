@@ -35,7 +35,7 @@ export function TvShowCard({ tvShow }: any) {
                         >{item.name}</Text>
                         <Text
                             style={{
-                                color: "#fff",
+                                color: "#000",
                                 textAlign: 'center',
                                 width: "70%"
                             }}
@@ -45,7 +45,7 @@ export function TvShowCard({ tvShow }: any) {
                         >
                             <AntDesign name='star' color='#f7d354' />
                             <Text
-                                style={{ color: "#fff" }}
+                                style={{ color: "#000" }}
                             >{item.vote_average}</Text>
 
                         </View>
@@ -73,9 +73,9 @@ export function TvShowCard({ tvShow }: any) {
     }
 
     return (
-        <View >
+        <View
+        >
             <FlatList
-                style={{ maxHeight: 600 }}
                 data={tvShow}
                 numColumns={2}
                 renderItem={renderItem}
