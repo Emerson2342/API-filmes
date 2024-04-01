@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
         height: 140,
         borderRadius: 5,
         alignSelf: "center",
-        // margin: 5,
         borderWidth: 3,
         borderColor: "rgb(0,110,150)",
         resizeMode: 'contain',
@@ -34,13 +33,10 @@ export const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1,
-        height: 50,
         width: '100%',
-        alignSelf: "center",
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'flex-end',
-        backgroundColor: "#00C8BE"
 
 
     },

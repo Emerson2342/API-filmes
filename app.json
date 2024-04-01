@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "APIFilmes",
+    "name": "Filmes e Séries",
     "slug": "APIFilmes",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/movie.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/movie.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00C8BE"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,13 +19,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/movie.png",
+        "backgroundColor": "#00C8BE"
       },
       "package": "com.missinhoo.APIFilmes"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/movie.png"
     },
     "extra": {
       "eas": {

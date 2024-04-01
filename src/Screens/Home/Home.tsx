@@ -5,8 +5,8 @@ import { MovieType } from '../../interfaces';
 import { API_IMAGE, API_LAST_MOVIES_OF_YEAR, API_LAST_TVSHOW_OF_YEAR } from '../../Constants/api';
 import { MovieDetails } from '../../Components/Modals/MovieDetails';
 import { TvShowDetails } from '../../Components/Modals/TvShowDetails';
-import { WaveBotton, WaveTop } from '../../Components/CustomLines/Wave';
-import MovieImage from '../../../assets/movie.png'
+import { WaveBotton, WaveTop, WaveTop2 } from '../../Components/CustomLines/Wave';
+import { MotiView } from 'moti'
 
 export function Home({ navigation }: any) {
 
@@ -16,7 +16,6 @@ export function Home({ navigation }: any) {
     const [modalMovieVisible, setModalMovieVisible] = useState(false);
     const [idMovie, setIdMovie] = useState(0);
     const [yearMovie, setYearMovie] = useState('');
-    const [movie, setMovie] = useState(!false);
 
     const [modalTvShowVisible, setModalTvShowVisible] = useState(false);
     const [idTvShow, setIdTvShow] = useState(0);
@@ -54,37 +53,54 @@ export function Home({ navigation }: any) {
                 <StatusBar
                     translucent={true}
                     backgroundColor={'transparent'}
+                    barStyle={'dark-content'}
+
                 />
-                <View
-                    style={{ top: -30 }}
-                ><WaveTop /></View>
-
-                {/*    {movie ? <View
+                <MotiView
+                    from={{ translateY: -200, opacity: 0 }}
+                    animate={{ translateY: 0, opacity: 1 }}
+                    transition={{ type: 'timing', duration: 3000 }}
                 >
-                    <Image
-                        style={{
-                            zIndex: 1,
-                            flex: 1,
-                            position: 'absolute',
-                            width: 400,
-                            height: 400
-                        }}
-                        source={MovieImage}
-                    />
-                </View> : <></>} */}
+                    <View
+                        style={{ top: -30 }}
+                    ><WaveTop />
+                    </View>
+                </MotiView>
+                <MotiView
+                    from={{ translateY: -200, opacity: 0 }}
+                    animate={{ translateY: 0, opacity: 1 }}
+                    transition={{ type: 'timing', duration: 3000 }}
+                >
+                    <View
+                        style={{ top: 380 }}
+                    ><WaveTop2 />
+                    </View>
+                </MotiView>
+                <MotiView
 
-
-                <Text
-                    style={{ textAlign: "center", fontSize: 30, fontWeight: 'bold' }}
-                >Bem Vindo</Text>
+                    from={{ translateY: -200, opacity: 0 }}
+                    animate={{ translateY: 0, opacity: 1 }}
+                    transition={{ type: 'timing', duration: 3000 }}
+                >
+                    <Text
+                        style={{ textAlign: "center", fontSize: 30, fontWeight: 'bold' }}
+                    >Bem Vindo</Text>
+                </MotiView>
 
 
                 <View>
-                    <Text
-                        style={styles.subtitulo}
-                    >Filmes em destaques</Text>
+                    <MotiView
+                        from={{ translateX: 300, opacity: 0 }}
+                        animate={{ translateX: -90, opacity: 1 }}
+                        transition={{ type: 'timing', duration: 3000 }}
+                    >
+                        <Text
+                            style={styles.subtitulo}
+                        >Filmes em destaques</Text>
+                    </MotiView>
                     <ScrollView
                         horizontal
+                        showsHorizontalScrollIndicator={false}
 
                     >
 
@@ -94,39 +110,58 @@ export function Home({ navigation }: any) {
                             const year = releaseDate.split("-")[0];
 
                             return (
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setIdMovie(movie.id)
-                                        setYearMovie(year)
-                                        setModalMovieVisible(true)
-                                        setMovie(true);
-                                    }}
-                                    style={{ width: 100 }}
-                                    key={movie.id}>
-                                    <Image
+                                <View
+                                    key={movie.id}
+                                    style={{ width: 110, paddingLeft: 5, paddingRight: 5 }}
 
-                                        style={styles.imagePoster}
-                                        source={{ uri: API_IMAGE + movie.poster_path }}
-                                    />
-                                    <Text
-                                        style={styles.titleMovie}
-                                    >{movie.title}</Text>
-                                </TouchableOpacity>
+                                >
+                                    <MotiView
+                                        from={{ rotateX: "-90deg", opacity: 0 }}
+                                        animate={{ rotateX: "0deg", opacity: 1 }}
+                                        transition={{ type: 'timing', duration: 2000 }}
+                                    >
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setIdMovie(movie.id)
+                                                setYearMovie(year)
+                                                setModalMovieVisible(true)
+                                            }}
+                                            style={{ width: 100 }}
+                                        >
+                                            <Image
+
+                                                style={styles.imagePoster}
+                                                source={{ uri: API_IMAGE + movie.poster_path }}
+                                            />
+
+                                            <Text
+                                                style={styles.titleMovie}
+                                            >{movie.title}</Text>
+                                        </TouchableOpacity>
+                                    </MotiView>
+                                </View>
                             )
-
                         })}
-
                     </ScrollView>
                 </View>
 
                 <View
                     style={{ paddingTop: 50 }}
                 >
-                    <Text
-                        style={styles.subtitulo}
-                    >Séries em destaques</Text>
+                    <MotiView
+                        from={{ translateX: -300, opacity: 0 }}
+                        animate={{ translateX: 90, opacity: 1 }}
+                        transition={{ type: 'timing', duration: 3000 }}
+                    >
+                        <Text
+                            style={styles.subtitulo}
+                        >Séries em destaques</Text>
+                    </MotiView>
+
+
                     <ScrollView
                         horizontal
+                        showsHorizontalScrollIndicator={false}
                     >
 
                         {popularTvShows.map(tvShow => {
@@ -135,23 +170,31 @@ export function Home({ navigation }: any) {
                             const year = releaseDate.split("-")[0];
 
                             return (
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setIdTvShow(tvShow.id)
-                                        setYearTvShow(year)
-                                        setModalTvShowVisible(true)
-                                    }}
-                                    style={{ width: 100 }}
-                                    key={tvShow.id}>
-                                    <Image
 
-                                        style={styles.imagePoster}
-                                        source={{ uri: API_IMAGE + tvShow.poster_path }}
-                                    />
-                                    <Text
-                                        style={styles.titleMovie}
-                                    >{tvShow.name}</Text>
-                                </TouchableOpacity>
+                                <MotiView
+                                    from={{ rotateX: "-90deg", }}
+                                    animate={{ rotateX: "0deg", }}
+                                    transition={{ type: 'timing', duration: 2000 }}
+                                    key={tvShow.id}
+                                >
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setIdTvShow(tvShow.id)
+                                            setYearTvShow(year)
+                                            setModalTvShowVisible(true)
+                                        }}
+                                        style={{ width: 100 }}
+                                    >
+                                        <Image
+
+                                            style={styles.imagePoster}
+                                            source={{ uri: API_IMAGE + tvShow.poster_path }}
+                                        />
+                                        <Text
+                                            style={styles.titleMovie}
+                                        >{tvShow.name}</Text>
+                                    </TouchableOpacity>
+                                </MotiView>
                             )
 
                         })}
@@ -159,9 +202,12 @@ export function Home({ navigation }: any) {
                     </ScrollView>
 
                 </View>
-                <WaveBotton />
-                <View
+
+                <MotiView
                     style={styles.buttonContainer}
+                    from={{ translateY: 200, opacity: 0 }}
+                    animate={{ translateY: 0, opacity: 1 }}
+                    transition={{ type: 'timing', duration: 3000 }}
                 >
 
                     <TouchableOpacity
@@ -180,7 +226,7 @@ export function Home({ navigation }: any) {
                             style={styles.textButton}
                         >Séries</Text>
                     </TouchableOpacity>
-                </View>
+                </MotiView>
                 <Modal
                     transparent={true}
                     visible={modalMovieVisible}
@@ -206,6 +252,6 @@ export function Home({ navigation }: any) {
 
             </View>
 
-        </View>
+        </View >
     );
 }
