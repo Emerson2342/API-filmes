@@ -209,7 +209,6 @@ export function Home({ navigation }: any) {
                     animate={{ translateY: 0, opacity: 1 }}
                     transition={{ type: 'timing', duration: 3000 }}
                 >
-
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => navigation.navigate("movies")}

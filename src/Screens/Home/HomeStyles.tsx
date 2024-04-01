@@ -36,15 +36,12 @@ export const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: "space-between",
-        alignItems: 'flex-end',
-
-
     },
     button: {
-        backgroundColor: "#fff",
         padding: 5,
         width: "40%",
-        alignSelf: "center",
+        bottom: 40,
+        alignSelf: 'flex-end',
         margin: 10,
         borderRadius: 5,
         borderWidth: 1
