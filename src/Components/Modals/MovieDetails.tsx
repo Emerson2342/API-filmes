@@ -37,8 +37,8 @@ export function MovieDetails({ handleClose, id, year }: any) {
                 <View
                     style={{ padding: 10 }}
                 >
-                    <Text>Orçamento: {movie?.budget}</Text>
-                    <Text>Receita: {movie?.revenue}</Text>
+                    <Text>Orçamento: {formattedBudget}</Text>
+                    <Text>Receita: {formattedRevenue}</Text>
 
                     <Text>Duração: {movie?.runtime} min</Text>
                     <Text>Gêneros: {movie && movie.genres.map((genre, index) => (
