@@ -39,26 +39,36 @@ export const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: "bold"
     },
-    buttonContainer: {
-
-        width: '100%',
+    generosContainer: {
+        width: '95%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#00C8BE',
-        padding: 10
+        justifyContent: "space-around",
+        flexWrap: 'wrap'
     },
-    button: {
-        backgroundColor: "#fff",
-        padding: 5,
-        width: "40%",
+    generoButton: {
+        backgroundColor: '#00C8BE',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        margin: 5,
         borderRadius: 5,
-        borderWidth: 1,
+        elevation: 10
 
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 20
-    }
+        fontSize: 20,
+        top: 87
+    },
+    buttonWrapper: {
+        zIndex: 1,
+        top: 40,
+        width: "50%",
+        alignSelf: 'center',
+    },
+    lottieView: {
+        position: 'absolute',
+        width: 200,
+        height: 200,
+    },
 });

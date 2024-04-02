@@ -18,8 +18,6 @@ export function MovieCard({ movie }: any) {
         const relaseMovie = item.release_date;
         const yearMovie = relaseMovie.split("-")[0];
 
-
-
         return (
             <View style={styles.container} >
                 <View style={styles.list}>
@@ -76,7 +74,6 @@ export function MovieCard({ movie }: any) {
         <View
         >
             <FlatList
-
                 data={movie}
                 numColumns={2}
                 renderItem={renderItem}
@@ -86,6 +83,7 @@ export function MovieCard({ movie }: any) {
             <Modal
                 transparent={true}
                 visible={modalVisible}
+                animationType='fade'
             >
                 <MovieDetails
                     handleClose={() => setModalVisible(false)}

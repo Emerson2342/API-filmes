@@ -34,22 +34,26 @@ export const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         width: '100%',
-        flexDirection: 'row',
-        justifyContent: "space-between",
-    },
-    button: {
-        padding: 5,
-        width: "40%",
-        bottom: 40,
-        alignSelf: 'flex-end',
-        margin: 10,
-        borderRadius: 5,
-        borderWidth: 1
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        top: -35,
+        paddingBottom: 15,
+        flexDirection: "row",
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 20
-    }
+        fontSize: 20,
+        top: 87
+    },
+    buttonWrapper: {
+        width: "50%",
+        alignSelf: 'center'
+    },
+    lottieView: {
+        position: 'absolute',
+        width: 200,
+        height: 200,
+    },
 
 });

@@ -8,9 +8,8 @@ export const styles = StyleSheet.create({
         marginVertical: 5,
         marginHorizontal: 5,
         borderRadius: 3,
-        elevation: 10,
-        backgroundColor: '#ffff'
-
+        elevation: 3,
+        backgroundColor: '#fff'
     },
     list: {
         flexDirection: 'row',
@@ -46,7 +45,7 @@ export const styles = StyleSheet.create({
 
     button: {
         width: "90%",
-        backgroundColor: "#f7d354",
+        backgroundColor: "#00C8BE",
         alignSelf: 'center',
         borderRadius: 3,
         alignItems: 'center',

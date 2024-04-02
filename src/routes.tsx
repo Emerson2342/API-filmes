@@ -4,6 +4,7 @@ import { Movies } from "./Screens/Movies/Movies";
 import { TVShows } from "./Screens/TVShows/TVShows";
 import { BuscaDeFilmes } from "./Screens/Movies/BuscaFilmes/BuscaDeFilmes";
 import { BuscaDeSeries } from "./Screens/TVShows/BuscaDeSeries";
+import { BuscaDeFilmesPorGenero } from "./Screens/Movies/BuscaFilmes/BuscaDeFilmesPorGenero";
 
 
 const { Screen, Navigator } = createStackNavigator();
@@ -17,33 +18,19 @@ export function Routes() {
                 headerShown: false,
                 gestureEnabled: true,
                 gestureDirection: "horizontal",
-                cardStyleInterpolator: ({ current }) => ({
-                    cardStyle: {
-                        opacity: current.progress,
-                    },
 
-                }),
                 transitionSpec: {
-                    open: { animation: 'timing', config: { duration: 1000 } },
-                    close: { animation: 'timing', config: { duration: 1000 } },
+                    open: { animation: 'timing', config: { duration: 500 } },
+                    close: { animation: 'timing', config: { duration: 500 } },
                 },
             }}
         >
-            <Screen name='home' component={Home} options={{
-                animationTypeForReplace: 'push',
-            }} />
-            <Screen name='movies' component={Movies} options={{
-                animationTypeForReplace: 'push',
-            }} />
-            <Screen name="buscaFilmes" component={BuscaDeFilmes} options={{
-                animationTypeForReplace: 'push',
-            }} />
-            <Screen name="tvshows" component={TVShows} options={{
-                animationTypeForReplace: 'push',
-            }} />
-            <Screen name="buscaSeries" component={BuscaDeSeries} options={{
-                animationTypeForReplace: 'push',
-            }} />
+            <Screen name='home' component={Home} />
+            <Screen name='movies' component={Movies} />
+            <Screen name="buscaFilmes" component={BuscaDeFilmes} />
+            <Screen name="tvshows" component={TVShows} />
+            <Screen name="buscaSeries" component={BuscaDeSeries} />
+            <Screen name='buscaFilmesPorGenero' component={BuscaDeFilmesPorGenero} />
         </Navigator>
     )
 } 

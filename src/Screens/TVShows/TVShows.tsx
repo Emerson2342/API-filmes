@@ -7,6 +7,7 @@ import { FontAwesome5 } from 'react-native-vector-icons';
 import { MovieType } from '../../interfaces';
 import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
 import { WaveBottomMovies, WaveTop } from '../../Components/CustomLines/Wave';
+import { MotiView } from 'moti';
 
 export function TVShows({ navigation }: any) {
 
@@ -69,13 +70,16 @@ export function TVShows({ navigation }: any) {
             <Text
                 style={styles.textTitle}
             >Melhores Séries de TV</Text>
-            <View
+            <MotiView
                 style={{ top: 200, height: 520, position: "absolute" }}
+                from={{ translateY: 200, opacity: 0 }}
+                animate={{ translateY: 0, opacity: 1 }}
+                transition={{ type: 'spring', duration: 5500 }}
             >
                 {topTvShows.length === 0 && <Text>Carregando...</Text>}
 
                 {topTvShows.length > 0 && topTvShows && <TvShowCard key={topTvShows[0].id} tvShow={topTvShows} />}
-            </View>
+            </MotiView>
             <View
                 style={{ flex: 1, justifyContent: "flex-end", }}
             >

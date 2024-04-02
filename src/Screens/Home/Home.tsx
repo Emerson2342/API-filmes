@@ -60,7 +60,7 @@ export function Home({ navigation }: any) {
                 <MotiView
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 3000 }}
+                    transition={{ type: 'spring', duration: 7000 }}
                 >
                     <View
                         style={{ top: -30 }}
@@ -70,7 +70,7 @@ export function Home({ navigation }: any) {
                 <MotiView
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 3000 }}
+                    transition={{ type: 'spring', duration: 7000 }}
                 >
                     <View
                         style={{ top: 380 }}
@@ -81,19 +81,18 @@ export function Home({ navigation }: any) {
 
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 3000 }}
+                    transition={{ type: 'spring', duration: 7000 }}
                 >
                     <Text
                         style={{ textAlign: "center", fontSize: 30, fontWeight: 'bold' }}
                     >Bem Vindo</Text>
                 </MotiView>
 
-
                 <View>
                     <MotiView
                         from={{ translateX: 300, opacity: 0 }}
                         animate={{ translateX: -90, opacity: 1 }}
-                        transition={{ type: 'timing', duration: 3000 }}
+                        transition={{ type: 'spring', duration: 7000 }}
                     >
                         <Text
                             style={styles.subtitulo}
@@ -102,11 +101,8 @@ export function Home({ navigation }: any) {
                     <ScrollView
                         horizontal
                         showsHorizontalScrollIndicator={false}
-
                     >
-
                         {popularMovies.map(movie => {
-
                             const releaseDate = movie.release_date || "Data indisponível";
                             const year = releaseDate.split("-")[0];
 
@@ -119,7 +115,7 @@ export function Home({ navigation }: any) {
                                     <MotiView
                                         from={{ rotateX: "-90deg", opacity: 0 }}
                                         animate={{ rotateX: "0deg", opacity: 1 }}
-                                        transition={{ type: 'timing', duration: 2000 }}
+                                        transition={{ type: 'spring', duration: 7000 }}
                                     >
                                         <TouchableOpacity
                                             onPress={() => {
@@ -152,7 +148,7 @@ export function Home({ navigation }: any) {
                     <MotiView
                         from={{ translateX: -300, opacity: 0 }}
                         animate={{ translateX: 90, opacity: 1 }}
-                        transition={{ type: 'timing', duration: 3000 }}
+                        transition={{ type: 'spring', duration: 7000 }}
                     >
                         <Text
                             style={styles.subtitulo}
@@ -175,7 +171,7 @@ export function Home({ navigation }: any) {
                                 <MotiView
                                     from={{ rotateX: "-90deg", }}
                                     animate={{ rotateX: "0deg", }}
-                                    transition={{ type: 'timing', duration: 2000 }}
+                                    transition={{ type: 'spring', duration: 7000 }}
                                     key={tvShow.id}
                                 >
                                     <TouchableOpacity
@@ -208,25 +204,38 @@ export function Home({ navigation }: any) {
                     style={styles.buttonContainer}
                     from={{ translateY: 200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 3000 }}
+                    transition={{ type: 'spring', duration: 7000 }}
                 >
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => navigation.navigate("movies")}
-                    >
+                    <View style={styles.buttonWrapper}>
+                        <LottieView
+                            autoPlay
+                            loop
+                            speed={0.5}
+                            style={styles.lottieView}
+                            source={require('./../../Components/ButtonAnimated/buttonHome.json')}
+                        />
                         <Text
+                            onPress={() => navigation.navigate("movies")}
                             style={styles.textButton}
                         >Filmes</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => navigation.navigate("tvshows")}
-                    >
+                    </View>
+                    <View style={styles.buttonWrapper}>
+                        <LottieView
+                            autoPlay
+                            loop
+                            speed={0.5}
+                            style={styles.lottieView}
+                            source={require('./../../Components/ButtonAnimated/buttonHome.json')}
+                        />
                         <Text
+                            onPress={() => navigation.navigate("tvshows")}
                             style={styles.textButton}
                         >Séries</Text>
-                    </TouchableOpacity>
+                    </View>
                 </MotiView>
+
+
+
                 <Modal
                     transparent={true}
                     visible={modalMovieVisible}
