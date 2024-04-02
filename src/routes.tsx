@@ -12,50 +12,38 @@ export function Routes() {
 
     return (
         <Navigator
+
+            screenOptions={{
+                headerShown: false,
+                gestureEnabled: true,
+                gestureDirection: "horizontal",
+                cardStyleInterpolator: ({ current }) => ({
+                    cardStyle: {
+                        opacity: current.progress,
+                    },
+
+                }),
+                transitionSpec: {
+                    open: { animation: 'timing', config: { duration: 1000 } },
+                    close: { animation: 'timing', config: { duration: 1000 } },
+                },
+            }}
         >
-            <Screen
-                name='home'
-                component={Home}
-                options={{
-                    headerShown: false,
-                    ...TransitionPresets.SlideFromRightIOS
-                }}
-            />
-
-            <Screen
-                name='movies'
-                component={Movies}
-                options={{
-                    headerShown: false,
-                    ...TransitionPresets.SlideFromRightIOS
-                }}
-            />
-            <Screen
-                name="buscaFilmes"
-                component={BuscaDeFilmes}
-                options={{
-                    headerShown: false,
-                    ...TransitionPresets.SlideFromRightIOS
-                }}
-            />
-
-            <Screen
-                name="tvshows"
-                component={TVShows}
-                options={{
-                    headerShown: false,
-                    ...TransitionPresets.SlideFromRightIOS
-                }}
-            />
-            <Screen
-                name="buscaSeries"
-                component={BuscaDeSeries}
-                options={{
-                    headerShown: false,
-                    ...TransitionPresets.SlideFromRightIOS
-                }}
-            />
-
+            <Screen name='home' component={Home} options={{
+                animationTypeForReplace: 'push',
+            }} />
+            <Screen name='movies' component={Movies} options={{
+                animationTypeForReplace: 'push',
+            }} />
+            <Screen name="buscaFilmes" component={BuscaDeFilmes} options={{
+                animationTypeForReplace: 'push',
+            }} />
+            <Screen name="tvshows" component={TVShows} options={{
+                animationTypeForReplace: 'push',
+            }} />
+            <Screen name="buscaSeries" component={BuscaDeSeries} options={{
+                animationTypeForReplace: 'push',
+            }} />
         </Navigator>
     )
 } 
