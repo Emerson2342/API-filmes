@@ -5,8 +5,9 @@ import { MovieType } from '../../interfaces';
 import { API_IMAGE, API_LAST_MOVIES_OF_YEAR, API_LAST_TVSHOW_OF_YEAR } from '../../Constants/api';
 import { MovieDetails } from '../../Components/Modals/MovieDetails';
 import { TvShowDetails } from '../../Components/Modals/TvShowDetails';
-import { WaveBotton, WaveTop, WaveTop2 } from '../../Components/CustomLines/Wave';
-import { MotiView } from 'moti'
+import { WaveTop, WaveTop2 } from '../../Components/CustomLines/Wave';
+import { MotiView } from 'moti';
+import LottieView from 'lottie-react-native';
 
 export function Home({ navigation }: any) {
 
