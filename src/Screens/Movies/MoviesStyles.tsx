@@ -3,21 +3,20 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         paddingTop: 30,
         backgroundColor: '#fff',
 
     },
     inputContainer: {
         flexDirection: "row",
-        justifyContent: "space-around",
-        width: '90%',
-        alignSelf: 'flex-end',
+
+        width: '95%',
+        alignSelf: 'center',
         margin: '5%',
     },
     input: {
         backgroundColor: "#fff",
-        width: '75%',
+        width: '95%',
         height: 30,
         padding: 1,
         borderRadius: 5,
@@ -37,7 +36,8 @@ export const styles = StyleSheet.create({
     textTitle: {
         top: -20,
         fontSize: 30,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        textAlign: 'center'
     },
     generosContainer: {
         width: '95%',

@@ -9,7 +9,8 @@ export const styles = StyleSheet.create({
         marginHorizontal: 5,
         borderRadius: 3,
         elevation: 3,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+
     },
     list: {
         flexDirection: 'row',

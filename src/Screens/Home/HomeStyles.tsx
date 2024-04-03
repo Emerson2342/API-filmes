@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        top: 35
+        top: 35,
+
     },
     imagePoster: {
         width: 90,

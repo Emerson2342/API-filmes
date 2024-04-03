@@ -6,6 +6,7 @@ import { styles } from './MovieCardStyles';
 import { API_IMAGE } from '../../Constants/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MovieDetails } from '../Modals/MovieDetails';
+import { MotiView } from 'moti';
 
 export function MovieCard({ movie }: any) {
 
@@ -13,13 +14,20 @@ export function MovieCard({ movie }: any) {
     const [idMovie, setIdMovie] = useState(0);
     const [yearMovie, setYearMovie] = useState(0);
 
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item, index }: any) => {
 
         const relaseMovie = item.release_date;
         const yearMovie = relaseMovie.split("-")[0];
 
+        const translateX = index % 2 === 0 ? -200 : 200;
+
         return (
-            <View style={styles.container} >
+            <MotiView
+                from={{ translateX: translateX, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
+                style={styles.container}
+            >
                 <View style={styles.list}>
                     <Image
                         style={styles.imagePoster}
@@ -66,7 +74,7 @@ export function MovieCard({ movie }: any) {
                         >Detalhes</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </MotiView>
         )
     }
 

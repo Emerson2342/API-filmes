@@ -34,6 +34,18 @@ export function Movies({ navigation }: any) {
         { nome: 'Thriller', id: 53 }
     ];
 
+    const rotateXMatrix = (angle: any) => {
+        const radianAngle = (angle * Math.PI) / 180;
+        const cos = Math.cos(radianAngle);
+        const sin = Math.sin(radianAngle);
+
+        return [
+            1, 0, 0, 0,
+            0, cos, -sin, 0,
+            0, sin, cos, 0,
+            0, 0, 0, 1,
+        ];
+    };
 
     const getTopRatedMovies = async (url: any) => {
 
@@ -73,68 +85,116 @@ export function Movies({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            <View
-                style={{ top: -230, alignSelf: 'stretch' }}
+            <MotiView
+                from={{ translateY: -200, opacity: 0 }}
+                animate={{ translateY: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
             >
-                <WaveTop />
-            </View>
+                <View
+                    style={{ top: - 100 }}
+                ><WaveTop />
+                </View>
+            </MotiView >
             <View
                 style={{ width: "100%" }}
             >
                 <View
                     style={styles.inputContainer}
                 >
-                    <TextInput
-                        style={styles.input}
-                        value={search}
-                        placeholder='Digite um filme'
-                        onChangeText={(filme) => setSearch(filme)}
-                        onSubmitEditing={handleSubmit}
-                    />
-                    <TouchableOpacity
-                        onPress={handleSubmit}
-                        style={styles.searchContainer}>
-                        <FontAwesome5 name='search' size={20} />
-                    </TouchableOpacity>
+                    <MotiView
+                        style={{ width: "80%" }}
+                        from={{ translateX: -200, opacity: 0 }}
+                        animate={{ translateX: 0, opacity: 1 }}
+                        transition={{ type: 'timing', duration: 2000 }}
+                    >
+                        <TextInput
+                            style={styles.input}
+                            value={search}
+                            placeholder='Digite um filme'
+                            onChangeText={(filme) => setSearch(filme)}
+                            onSubmitEditing={handleSubmit}
+                        />
+                    </MotiView>
+                    <MotiView
+                        style={{ width: "90%" }}
+                        from={{ translateX: 200, opacity: 0 }}
+                        animate={{ translateX: 0, opacity: 1 }}
+                        transition={{ type: 'timing', duration: 2000 }}
+                    >
+                        <TouchableOpacity
+                            onPress={handleSubmit}
+                            style={styles.searchContainer}>
+                            <FontAwesome5 name='search' size={20} />
+                        </TouchableOpacity>
+                    </MotiView>
                 </View>
             </View>
-            <Text
-                style={styles.textTitle}
-            > Filmes</Text>
-            <Text style={{ fontStyle: 'italic' }}>Melhores avaliados</Text>
-
             <MotiView
+                from={{ translateX: 200, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
+            >
+                <Text
+                    style={styles.textTitle}
+                > Filmes</Text>
+            </MotiView>
+            <MotiView
+                from={{ translateX: -200, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
+            >
+                <Text style={{ fontStyle: 'italic', textAlign: 'center', top: 15 }}>Melhores avaliados</Text>
+            </MotiView>
+            <View
                 style={{ height: 279, marginTop: 20 }}
-                from={{ translateY: 200, opacity: 0 }}
-                animate={{ translateY: 0, opacity: 1 }}
-                transition={{ type: 'spring', duration: 5500 }}
+
             >
                 {topMovies.length === 0 && <Text>Carregando...</Text>}
 
                 {topMovies.length > 0 && topMovies && <MovieCard key={topMovies[0].id} movie={topMovies} />}
-            </MotiView>
-
-            <Text style={{ fontStyle: 'italic', textAlign: 'center', padding: 10 }}>Busque por categoria</Text>
-            <View
-                style={styles.generosContainer}
+            </View>
+            <MotiView
+                from={{ translateX: 200, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
             >
+                <Text style={{ fontStyle: 'italic', textAlign: 'center', padding: 10 }}>Busque por categoria</Text>
+            </MotiView>
+            <View
+                style={styles.generosContainer} >
                 {generos.map((genero, index) => (
-                    <TouchableOpacity
+
+                    <MotiView
+
+                        from={{ rotateX: '-90deg', opacity: 0 }}
+                        animate={{ rotateX: '0deg', opacity: 1 }}
+                        transition={{ type: 'timing', duration: 2000 }}
                         key={index}
                         style={styles.generoButton}
-                        onPressIn={() => {
-                            setSearchGenre((prevSearch) => {
-                                return { nome: genero.nome, id: genero.id };
-                            });
-                        }}
-                        onPressOut={() => handleSearchGenre()}
                     >
-                        <Text >{genero.nome}</Text>
-                    </TouchableOpacity>
-                ))}
+                        <TouchableOpacity
 
+                            onPressIn={() => {
+                                setSearchGenre((prevSearch) => {
+                                    return { nome: genero.nome, id: genero.id };
+                                });
+                            }}
+                            onPressOut={() => handleSearchGenre()}
+                        >
+                            <Text >{genero.nome}</Text>
+                        </TouchableOpacity>
+                    </MotiView>
+                ))}
             </View>
-            <View style={styles.buttonWrapper}>
+
+
+            <MotiView
+                style={styles.buttonWrapper}
+                from={{ translateX: 200, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
+            >
+
                 <LottieView
                     autoPlay
                     loop
@@ -146,23 +206,23 @@ export function Movies({ navigation }: any) {
                     onPress={() => navigation.navigate("home")}
                     style={styles.textButton}
                 >Voltar</Text>
-            </View>
+
+            </MotiView>
 
 
             <MotiView
                 from={{ translateY: 200, opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 3000 }}
+                transition={{ type: 'timing', duration: 2000 }}
             >
-                <WaveBottomMovies
-                />
+                <WaveBottomMovies />
                 <View
-                    style={{ top: 18, zIndex: -5, height: 60, backgroundColor: "#00C8BE" }}
+                    style={{ top: 18, zIndex: -5, height: 90, backgroundColor: "#00C8BE" }}
                 />
             </MotiView>
 
 
 
-        </View>
+        </View >
     );
 }

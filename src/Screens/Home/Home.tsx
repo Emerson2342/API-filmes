@@ -60,20 +60,20 @@ export function Home({ navigation }: any) {
                 <MotiView
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'spring', duration: 7000 }}
+                    transition={{ type: 'timing', duration: 2500 }}
                 >
                     <View
-                        style={{ top: -30 }}
+                        style={{ top: 50 }}
                     ><WaveTop />
                     </View>
                 </MotiView>
                 <MotiView
+                    style={{ top: 430 }}
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'spring', duration: 7000 }}
+                    transition={{ type: 'timing', duration: 2500 }}
                 >
                     <View
-                        style={{ top: 380 }}
                     ><WaveTop2 />
                     </View>
                 </MotiView>
@@ -81,7 +81,7 @@ export function Home({ navigation }: any) {
 
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'spring', duration: 7000 }}
+                    transition={{ type: 'timing', duration: 2500 }}
                 >
                     <Text
                         style={{ textAlign: "center", fontSize: 30, fontWeight: 'bold' }}
@@ -92,7 +92,7 @@ export function Home({ navigation }: any) {
                     <MotiView
                         from={{ translateX: 300, opacity: 0 }}
                         animate={{ translateX: -90, opacity: 1 }}
-                        transition={{ type: 'spring', duration: 7000 }}
+                        transition={{ type: 'timing', duration: 2500 }}
                     >
                         <Text
                             style={styles.subtitulo}
@@ -115,7 +115,7 @@ export function Home({ navigation }: any) {
                                     <MotiView
                                         from={{ rotateX: "-90deg", opacity: 0 }}
                                         animate={{ rotateX: "0deg", opacity: 1 }}
-                                        transition={{ type: 'spring', duration: 7000 }}
+                                        transition={{ type: 'timing', duration: 2500 }}
                                     >
                                         <TouchableOpacity
                                             onPress={() => {
@@ -148,7 +148,7 @@ export function Home({ navigation }: any) {
                     <MotiView
                         from={{ translateX: -300, opacity: 0 }}
                         animate={{ translateX: 90, opacity: 1 }}
-                        transition={{ type: 'spring', duration: 7000 }}
+                        transition={{ type: 'timing', duration: 2500 }}
                     >
                         <Text
                             style={styles.subtitulo}
@@ -171,7 +171,7 @@ export function Home({ navigation }: any) {
                                 <MotiView
                                     from={{ rotateX: "-90deg", }}
                                     animate={{ rotateX: "0deg", }}
-                                    transition={{ type: 'spring', duration: 7000 }}
+                                    transition={{ type: 'timing', duration: 2500 }}
                                     key={tvShow.id}
                                 >
                                     <TouchableOpacity
@@ -204,7 +204,7 @@ export function Home({ navigation }: any) {
                     style={styles.buttonContainer}
                     from={{ translateY: 200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'spring', duration: 7000 }}
+                    transition={{ type: 'timing', duration: 2500 }}
                 >
                     <View style={styles.buttonWrapper}>
                         <LottieView
