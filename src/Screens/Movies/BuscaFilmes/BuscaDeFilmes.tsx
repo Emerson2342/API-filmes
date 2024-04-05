@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "rgba(0,150,150,0.5)",
+        backgroundColor: "#00C8BE",
         padding: 5,
     },
     text: {

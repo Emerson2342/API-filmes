@@ -63,7 +63,6 @@ export function Home({ navigation }: any) {
                     transition={{ type: 'timing', duration: 2500 }}
                 >
                     <View
-                    // style={{ top: 300 }}
                     ><WaveTop />
                     </View>
                 </MotiView>
@@ -147,7 +146,7 @@ export function Home({ navigation }: any) {
 
                         {popularTvShows.map(tvShow => {
 
-                            const releaseDate = tvShow.release_date || "Data indisponível";
+                            const releaseDate = tvShow.first_air_date || "Data indisponível";
                             const year = releaseDate.split("-")[0];
 
                             return (

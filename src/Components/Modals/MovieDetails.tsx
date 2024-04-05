@@ -4,6 +4,7 @@ import { API_DATABASE, API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Con
 import { MovieType } from "../../interfaces";
 import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export function MovieDetails({ handleClose, id, year }: any) {
 
@@ -19,7 +20,6 @@ export function MovieDetails({ handleClose, id, year }: any) {
         const movieURL = `${API_SEARCH_MOVIE_ID}${id}?${API_KEY}&language=pt-BR`
         getMovie(movieURL)
         console.log(movieURL)
-        console.log(JSON.stringify(movie, null, 2))
 
     }, [])
 
@@ -28,7 +28,7 @@ export function MovieDetails({ handleClose, id, year }: any) {
     const formattedRevenue = movie?.revenue.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
 
             {movie ? (<MotiView
                 from={{ opacity: 0 }}
@@ -75,32 +75,53 @@ export function MovieDetails({ handleClose, id, year }: any) {
                         >Fechar</Text>
                     </TouchableOpacity>
                 </View>
-            </MotiView>) : <LottieView
-                autoPlay
-                loop
-                style={styles.lottieView}
-                source={require('./../../Components/ButtonAnimated/loading.json')}
-            />}
+            </MotiView>) : <View
 
-        </View >
+                style={styles.loading}
+            >
+                <LottieView
+                    autoPlay
+                    loop
+                    style={styles.lottieView}
+                    source={require('./../../Components/ButtonAnimated/loading.json')}
+                />
+                <TouchableOpacity
+                    style={[styles.button, { top: 200 }]}
+                    onPress={handleClose}
+                >
+                    <Text
+                        style={styles.textButton}
+                    >Voltar</Text>
+                </TouchableOpacity>
+            </View>}
+
+        </ScrollView >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "rgba(0,0,0,0.7)"
+        alignContent: 'center',
+        backgroundColor: "rgba(0,0,0,0.7)",
+        padding: 30,
+        height: "100%"
     },
     modal: {
+        flex: 1,
         backgroundColor: "rgb(0, 150, 150)",
-        width: "90%",
-        height: 'auto',
+        width: "100%",
         padding: 5,
+        marginBottom: 50,
         borderRadius: 9,
         borderWidth: 1,
         borderColor: "#fff"
+    },
+    loading: {
+        height: 600,
+        marginTop: 250,
+        width: "80%",
+        alignSelf: 'center',
+        alignItems: 'center'
     },
     title: {
         fontSize: 20,
@@ -131,7 +152,6 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     lottieView: {
-        position: 'absolute',
         width: 200,
         height: 200,
     },
