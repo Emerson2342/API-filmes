@@ -14,16 +14,12 @@ export const styles = StyleSheet.create({
     content: {
         flex: 1,
         top: 35,
-
     },
     imagePoster: {
-        width: 90,
-        height: 140,
+        width: 150,
+        height: 230,
         borderRadius: 5,
         alignSelf: "center",
-        borderWidth: 3,
-        borderColor: "rgb(0,110,150)",
-        resizeMode: 'contain',
     },
 
     titleMovie: {
@@ -35,10 +31,9 @@ export const styles = StyleSheet.create({
     buttonContainer: {
         flex: 1,
         width: '100%',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-end',
         alignItems: 'center',
-        top: -35,
-        paddingBottom: 15,
+        top: -95,
         flexDirection: "row",
     },
     textButton: {
@@ -49,7 +44,7 @@ export const styles = StyleSheet.create({
     },
     buttonWrapper: {
         width: "50%",
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     lottieView: {
         position: 'absolute',

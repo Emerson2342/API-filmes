@@ -63,18 +63,8 @@ export function Home({ navigation }: any) {
                     transition={{ type: 'timing', duration: 2500 }}
                 >
                     <View
-                        style={{ top: 50 }}
+                    // style={{ top: 300 }}
                     ><WaveTop />
-                    </View>
-                </MotiView>
-                <MotiView
-                    style={{ top: 430 }}
-                    from={{ translateY: -200, opacity: 0 }}
-                    animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 2500 }}
-                >
-                    <View
-                    ><WaveTop2 />
                     </View>
                 </MotiView>
                 <MotiView
@@ -107,44 +97,38 @@ export function Home({ navigation }: any) {
                             const year = releaseDate.split("-")[0];
 
                             return (
-                                <View
+                                <MotiView
                                     key={movie.id}
-                                    style={{ width: 110, paddingLeft: 5, paddingRight: 5 }}
-
+                                    style={{ width: 150, marginLeft: 5 }}
+                                    from={{ rotateX: "-90deg", opacity: 0 }}
+                                    animate={{ rotateX: "0deg", opacity: 1 }}
+                                    transition={{ type: 'timing', duration: 2500 }}
                                 >
-                                    <MotiView
-                                        from={{ rotateX: "-90deg", opacity: 0 }}
-                                        animate={{ rotateX: "0deg", opacity: 1 }}
-                                        transition={{ type: 'timing', duration: 2500 }}
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setIdMovie(movie.id)
+                                            setYearMovie(year)
+                                            setModalMovieVisible(true)
+                                        }}
+
                                     >
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setIdMovie(movie.id)
-                                                setYearMovie(year)
-                                                setModalMovieVisible(true)
-                                            }}
-                                            style={{ width: 100 }}
-                                        >
-                                            <Image
+                                        <Image
 
-                                                style={styles.imagePoster}
-                                                source={{ uri: API_IMAGE + movie.poster_path }}
-                                            />
+                                            style={styles.imagePoster}
+                                            source={{ uri: API_IMAGE + movie.poster_path }}
+                                        />
 
-                                            <Text
-                                                style={styles.titleMovie}
-                                            >{movie.title}</Text>
-                                        </TouchableOpacity>
-                                    </MotiView>
-                                </View>
+                                        <Text
+                                            style={styles.titleMovie}
+                                        >{movie.title}</Text>
+                                    </TouchableOpacity>
+                                </MotiView>
                             )
                         })}
                     </ScrollView>
                 </View>
 
-                <View
-                    style={{ paddingTop: 50 }}
-                >
+                <View>
                     <MotiView
                         from={{ translateX: -300, opacity: 0 }}
                         animate={{ translateX: 90, opacity: 1 }}
@@ -169,6 +153,7 @@ export function Home({ navigation }: any) {
                             return (
 
                                 <MotiView
+                                    style={{ width: 150, marginLeft: 5, }}
                                     from={{ rotateX: "-90deg", }}
                                     animate={{ rotateX: "0deg", }}
                                     transition={{ type: 'timing', duration: 2500 }}
@@ -180,7 +165,6 @@ export function Home({ navigation }: any) {
                                             setYearTvShow(year)
                                             setModalTvShowVisible(true)
                                         }}
-                                        style={{ width: 100 }}
                                     >
                                         <Image
 
@@ -193,11 +177,8 @@ export function Home({ navigation }: any) {
                                     </TouchableOpacity>
                                 </MotiView>
                             )
-
                         })}
-
                     </ScrollView>
-
                 </View>
 
                 <MotiView
@@ -239,6 +220,7 @@ export function Home({ navigation }: any) {
                 <Modal
                     transparent={true}
                     visible={modalMovieVisible}
+
                 >
                     <MovieDetails
                         handleClose={() => setModalMovieVisible(false)}

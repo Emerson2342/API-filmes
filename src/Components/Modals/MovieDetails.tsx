@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { API_DATABASE, API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
 import { MovieType } from "../../interfaces";
+import { MotiView } from "moti";
+import LottieView from "lottie-react-native";
 
 export function MovieDetails({ handleClose, id, year }: any) {
 
@@ -27,7 +29,11 @@ export function MovieDetails({ handleClose, id, year }: any) {
 
     return (
         <View style={styles.container}>
-            <View
+
+            {movie ? (<MotiView
+                from={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ type: 'timing', duration: 700 }}
                 style={styles.modal}
             >
                 <Text
@@ -46,14 +52,13 @@ export function MovieDetails({ handleClose, id, year }: any) {
                     ))}</Text>
                 </View>
 
-
                 <Image
                     style={styles.imagePoster}
                     src={API_IMAGE + movie?.poster_path}
                 />
-                <Text
+                {movie?.tagline ? (<Text
                     style={{ textAlign: "center", padding: 10, fontStyle: 'italic' }}
-                >"{movie?.tagline}"</Text>
+                >"{movie?.tagline}"</Text>) : <></>}
 
                 <Text
                     style={{ textAlign: 'justify', padding: 10 }}
@@ -70,12 +75,14 @@ export function MovieDetails({ handleClose, id, year }: any) {
                         >Fechar</Text>
                     </TouchableOpacity>
                 </View>
-
-            </View>
-
+            </MotiView>) : <LottieView
+                autoPlay
+                loop
+                style={styles.lottieView}
+                source={require('./../../Components/ButtonAnimated/loading.json')}
+            />}
 
         </View >
-
     )
 }
 
@@ -122,5 +129,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
-    }
+    },
+    lottieView: {
+        position: 'absolute',
+        width: 200,
+        height: 200,
+    },
 })

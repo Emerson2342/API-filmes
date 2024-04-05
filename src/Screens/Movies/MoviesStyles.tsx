@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 30,
         backgroundColor: '#fff',
-
     },
     inputContainer: {
         flexDirection: "row",
@@ -25,7 +24,6 @@ export const styles = StyleSheet.create({
         borderWidth: 1
     },
     searchContainer: {
-        backgroundColor: "#f7d354",
         width: "20%",
         height: 30,
         alignItems: "center",
@@ -40,29 +38,28 @@ export const styles = StyleSheet.create({
         textAlign: 'center'
     },
     generosContainer: {
-        width: '95%',
+        width: '98%',
         flexDirection: 'row',
-        justifyContent: "space-around",
-        flexWrap: 'wrap'
+        justifyContent: "space-between",
+        flexWrap: 'wrap',
+        alignSelf: 'center'
     },
     generoButton: {
         backgroundColor: '#00C8BE',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        margin: 5,
-        borderRadius: 5,
-        elevation: 10
-
+        padding: 5,
+        marginVertical: 3,
+        marginHorizontal: 3,
+        borderRadius: 3,
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 20,
-        top: 87
+        top: 87,
     },
     buttonWrapper: {
-        zIndex: 1,
         top: 40,
+        zIndex: 1,
         width: "50%",
         alignSelf: 'center',
     },

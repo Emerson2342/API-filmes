@@ -5,6 +5,7 @@ import { TVShows } from "./Screens/TVShows/TVShows";
 import { BuscaDeFilmes } from "./Screens/Movies/BuscaFilmes/BuscaDeFilmes";
 import { BuscaDeSeries } from "./Screens/TVShows/BuscaDeSeries";
 import { BuscaDeFilmesPorGenero } from "./Screens/Movies/BuscaFilmes/BuscaDeFilmesPorGenero";
+import { BuscaDeSeriesPorGenero } from "./Screens/TVShows/BuscaDeSeriesPorGenero";
 
 
 const { Screen, Navigator } = createStackNavigator();
@@ -31,6 +32,7 @@ export function Routes() {
             <Screen name="tvshows" component={TVShows} />
             <Screen name="buscaSeries" component={BuscaDeSeries} />
             <Screen name='buscaFilmesPorGenero' component={BuscaDeFilmesPorGenero} />
+            <Screen name='buscaSeriesPorGenero' component={BuscaDeSeriesPorGenero} />
         </Navigator>
     )
 } 

@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
         borderRadius: 3,
         elevation: 3,
         backgroundColor: '#fff',
-
     },
     list: {
         flexDirection: 'row',
@@ -43,7 +42,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
     },
-
     button: {
         width: "90%",
         backgroundColor: "#00C8BE",

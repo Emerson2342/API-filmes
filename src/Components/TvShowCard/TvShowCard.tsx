@@ -6,6 +6,7 @@ import { styles } from './TvShowCardStyles';
 import { API_IMAGE } from '../../Constants/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TvShowDetails } from '../Modals/TvShowDetails';
+import { MotiView } from 'moti';
 
 export function TvShowCard({ tvShow }: any) {
 
@@ -13,15 +14,20 @@ export function TvShowCard({ tvShow }: any) {
     const [idTvShow, setIdTvShow] = useState(0);
     const [year, setYear] = useState(0);
 
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item, index }: any) => {
 
         const relaseTvShow = item.first_air_date || "Indisponível";
         const yearTvShow = relaseTvShow.split("-")[0];
 
-
+        const translateX = index % 2 === 0 ? -200 : 200;
 
         return (
-            <View style={styles.container} >
+            <MotiView
+                from={{ translateX: translateX, opacity: 0 }}
+                animate={{ translateX: 0, opacity: 1 }}
+                transition={{ type: 'timing', duration: 2000 }}
+                style={styles.container}
+            >
                 <View style={styles.list}>
                     <Image
                         style={styles.imagePoster}
@@ -68,7 +74,7 @@ export function TvShowCard({ tvShow }: any) {
                         >Detalhes</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </MotiView>
         )
     }
 

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { API_DATABASE, API_IMAGE, API_KEY, API_TVSHOW } from "../../Constants/api";
 import { MovieType, } from "../../interfaces";
+import { MotiView } from "moti";
+import LottieView from "lottie-react-native";
 
 export function TvShowDetails({ handleClose, id, year }: any) {
 
@@ -43,11 +45,13 @@ export function TvShowDetails({ handleClose, id, year }: any) {
             break;
     }
 
-
-
     return (
         <View style={styles.container}>
-            <View
+
+            {tvShow ? (<MotiView
+                from={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ type: 'timing', duration: 700 }}
                 style={styles.modal}
             >
                 <Text
@@ -80,8 +84,6 @@ export function TvShowDetails({ handleClose, id, year }: any) {
                         <Text key={index}>{index > 0 ? ', ' : ''}{genre.name}</Text>
                     ))}</Text>
                 </View>
-
-
                 <Image
                     style={styles.imagePoster}
                     src={API_IMAGE + tvShow?.poster_path}
@@ -105,12 +107,13 @@ export function TvShowDetails({ handleClose, id, year }: any) {
                         >Fechar</Text>
                     </TouchableOpacity>
                 </View>
-
-            </View>
-
-
+            </MotiView>) : <LottieView
+                autoPlay
+                loop
+                style={styles.lottieView}
+                source={require('./../../Components/ButtonAnimated/loading.json')}
+            />}
         </View >
-
     )
 }
 
@@ -157,5 +160,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
-    }
+    },
+    lottieView: {
+        position: 'absolute',
+        width: 200,
+        height: 200,
+    },
 })

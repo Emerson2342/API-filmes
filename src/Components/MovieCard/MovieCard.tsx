@@ -53,9 +53,7 @@ export function MovieCard({ movie }: any) {
                             <Text
                                 style={{ color: "#000" }}
                             >{item.vote_average}</Text>
-
                         </View>
-
                     </View>
                 </View>
                 <View
@@ -87,7 +85,6 @@ export function MovieCard({ movie }: any) {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
-
             <Modal
                 transparent={true}
                 visible={modalVisible}
