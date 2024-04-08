@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff"
-
     },
     subtitulo: {
         textAlign: 'center',
@@ -21,31 +20,30 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         alignSelf: "center",
     },
-
     titleMovie: {
         fontWeight: "bold",
         textAlign: "center",
         paddingLeft: 7,
         paddingRight: 7,
     },
-    buttonContainer: {
-        zIndex: -1,
+    buttonWrapper: {
         flex: 1,
-        width: '100%',
-        justifyContent: 'flex-end',
+        width: "100%",
+        alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
         alignItems: 'center',
-        top: -95,
-        flexDirection: "row",
+    },
+    button: {
+        backgroundColor: '#00C8BE',
+        width: '40%',
+        padding: 7,
+        borderRadius: 5,
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 20,
-        top: 87
-    },
-    buttonWrapper: {
-        width: "50%",
-        alignSelf: 'center',
     },
     lottieView: {
         position: 'absolute',

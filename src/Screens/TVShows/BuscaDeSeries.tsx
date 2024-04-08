@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 40,
         alignItems: 'center',
-        backgroundColor: "rgba(0,150,150,0.5)",
+        backgroundColor: "#00C8BE",
         padding: 5,
     },
     text: {

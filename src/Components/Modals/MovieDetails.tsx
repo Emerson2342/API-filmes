@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { API_DATABASE, API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
+import { API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
 import { MovieType } from "../../interfaces";
 import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useListaContext } from "../../Hooks/ListProvider";
 
 export function MovieDetails({ handleClose, id, year }: any) {
 
     const [movie, setMovie] = useState<MovieType | null>(null);
+
+    const { listaFilme, setListaFilme } = useListaContext();
 
     const getMovie = async (url: any) => {
         const res = await fetch(url);
@@ -23,6 +26,32 @@ export function MovieDetails({ handleClose, id, year }: any) {
 
     }, [])
 
+    const addFilme = (filme: MovieType) => {
+
+        const filmeExistente = listaFilme.find(item => item.id === filme.id);
+        if (!filmeExistente) {
+            filme.assistido = false;
+            setListaFilme([...listaFilme, filme])
+            Alert.alert(
+                "",
+                "Filme salvo na lista!",
+                [
+                    {
+                        text: "Fechar",
+                    },
+                ]
+            );
+        } else Alert.alert(
+            "",
+            "Filme já está na lista!",
+            [
+                {
+                    text: "Fechar",
+
+                },
+            ]
+        );
+    }
 
     const formattedBudget = movie?.budget.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
     const formattedRevenue = movie?.revenue.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
@@ -68,12 +97,23 @@ export function MovieDetails({ handleClose, id, year }: any) {
                 >
                     <TouchableOpacity
                         style={styles.button}
+                        onPress={() => {
+                            addFilme(movie)
+                        }}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Salvar na Lista</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
                         onPress={handleClose}
                     >
                         <Text
                             style={styles.textButton}
                         >Fechar</Text>
                     </TouchableOpacity>
+
                 </View>
             </MotiView>) : <View
 
@@ -94,7 +134,6 @@ export function MovieDetails({ handleClose, id, year }: any) {
                     >Voltar</Text>
                 </TouchableOpacity>
             </View>}
-
         </ScrollView >
     )
 }
@@ -139,7 +178,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     button: {
-        margin: 20,
+        marginVertical: 10,
         padding: 5,
         backgroundColor: "#fff",
         width: '60%',
