@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
 import { styles } from './MoviesStyles';
-import { API_DATABASE, API_KEY } from '../../Constants/api';
+import { API_DATABASE } from '../../Constants/api';
 import { MovieCard } from '../../Components/MovieCard/MovieCard';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { MovieType } from '../../interfaces';
 import { WaveBottomMovies, WaveTop } from '../../Components/CustomLines/Wave';
 import { MotiView } from 'moti';
 import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 
 export function Movies({ navigation }: any) {
@@ -27,25 +28,14 @@ export function Movies({ navigation }: any) {
         { nome: 'Fantasia', id: 14 },
         { nome: 'Horror', id: 27 },
         { nome: 'Mistério', id: 9648 },
+        { nome: 'Musical', id: 10402 },
         { nome: 'Romance', id: 10749 },
         { nome: 'Ficção Científica', id: 878 },
         { nome: 'Suspense', id: 53 },
         { nome: 'Terror', id: 27 },
-        { nome: 'Thriller', id: 53 }
+        { nome: 'Thriller', id: 53 },
+        { nome: 'Western', id: 37 }
     ];
-
-    const rotateXMatrix = (angle: any) => {
-        const radianAngle = (angle * Math.PI) / 180;
-        const cos = Math.cos(radianAngle);
-        const sin = Math.sin(radianAngle);
-
-        return [
-            1, 0, 0, 0,
-            0, cos, -sin, 0,
-            0, sin, cos, 0,
-            0, 0, 0, 1,
-        ];
-    };
 
     const getTopRatedMovies = async (url: any) => {
 
@@ -55,7 +45,7 @@ export function Movies({ navigation }: any) {
     }
 
     useEffect(() => {
-        const topRatedUrl = `${API_DATABASE}`;
+        const topRatedUrl = API_DATABASE;
         getTopRatedMovies(topRatedUrl)
 
     }, [])
@@ -85,16 +75,12 @@ export function Movies({ navigation }: any) {
 
     return (
         <View style={styles.container}>
-            <MotiView
-                from={{ translateY: -200, opacity: 0 }}
-                animate={{ translateY: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
-            >
-                <View
-                    style={{ top: - 100 }}
-                ><WaveTop />
-                </View>
-            </MotiView >
+            <Animatable.View
+                animation={'slideInDown'}
+                duration={3000}
+            ><WaveTop />
+            </Animatable.View>
+
             <View
                 style={{ width: "100%" }}
             >
@@ -143,13 +129,18 @@ export function Movies({ navigation }: any) {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ type: 'timing', duration: 2000 }}
             >
-                <Text style={{ fontStyle: 'italic', textAlign: 'center', top: 15 }}>Melhores avaliados</Text>
+                <Text style={{ top: 15, fontStyle: 'italic', textAlign: 'center', }}>Melhores avaliados</Text>
             </MotiView>
             <View
                 style={{ height: 279, marginTop: 20 }}
-
             >
-                {topMovies.length === 0 && <Text>Carregando...</Text>}
+                {topMovies.length === 0 && <LottieView
+                    autoPlay
+                    loop
+                    speed={0.5}
+                    style={styles.lottieView}
+                    source={require('./../../Components/ButtonAnimated/loading.json')}
+                />}
 
                 {topMovies.length > 0 && topMovies && <MovieCard key={topMovies[0].id} movie={topMovies} />}
             </View>
@@ -163,17 +154,13 @@ export function Movies({ navigation }: any) {
             <View
                 style={styles.generosContainer} >
                 {generos.map((genero, index) => (
-
-                    <MotiView
-
-                        from={{ rotateX: '-90deg', opacity: 0 }}
-                        animate={{ rotateX: '0deg', opacity: 1 }}
-                        transition={{ type: 'timing', duration: 2000 }}
+                    <Animatable.View
                         key={index}
                         style={styles.generoButton}
+                        animation={'flipInX'}
+                        duration={4000}
                     >
                         <TouchableOpacity
-
                             onPressIn={() => {
                                 setSearchGenre((prevSearch) => {
                                     return { nome: genero.nome, id: genero.id };
@@ -181,45 +168,51 @@ export function Movies({ navigation }: any) {
                             }}
                             onPressOut={() => handleSearchGenre()}
                         >
-                            <Text >{genero.nome}</Text>
+                            <Text
+                            >{genero.nome}</Text>
                         </TouchableOpacity>
-                    </MotiView>
+                    </Animatable.View>
                 ))}
             </View>
-
-
-            <MotiView
+            <Animatable.View
                 style={styles.buttonWrapper}
-                from={{ translateX: 200, opacity: 0 }}
-                animate={{ translateX: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
+                animation={'fadeIn'}
+                duration={5000}
+                delay={500}
             >
-
-                <LottieView
-                    autoPlay
-                    loop
-                    speed={0.5}
-                    style={styles.lottieView}
-                    source={require('./../../Components/ButtonAnimated/buttonWhite.json')}
-                />
-                <Text
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => navigation.navigate("home")}
-                    style={styles.textButton}
-                >Voltar</Text>
+                >
+                    <Text
 
-            </MotiView>
+                        style={styles.textButton}
+                    >Voltar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("listaFilmes")}
+                >
+                    <Text
+
+                        style={styles.textButton}
+                    >Filmes Salvos</Text>
+                </TouchableOpacity>
 
 
-            <MotiView
+            </Animatable.View>
+
+
+            {/*  <MotiView
                 from={{ translateY: 200, opacity: 0 }}
                 animate={{ translateY: 0, opacity: 1 }}
                 transition={{ type: 'timing', duration: 2000 }}
             >
                 <WaveBottomMovies />
                 <View
-                    style={{ top: 18, zIndex: -5, height: 90, backgroundColor: "#00C8BE" }}
+                    style={{ height: 80, backgroundColor: "#00C8BE" }}
                 />
-            </MotiView>
+            </MotiView> */}
 
 
 

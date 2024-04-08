@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, StatusBar } from 'react-native';
-import { MovieCard } from '../../../Components/MovieCard/MovieCard';
-import { API_SEARCH_MOVIE_GENRE_ID } from '../../../Constants/api';
-import { MovieType } from '../../../interfaces';
+import { MovieCard } from '../../Components/MovieCard/MovieCard';
+import { API_SEARCH_TVSHOW_GENRE_ID } from '../../Constants/api';
+import { MovieType } from '../../interfaces';
 import LottieView from 'lottie-react-native';
+import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
 
 
-export function BuscaDeFilmesPorGenero({ navigation, route }: { navigation: any, route: any }) {
+export function BuscaDeSeriesPorGenero({ navigation, route }: { navigation: any, route: any }) {
     const { nome, busca } = route.params;
 
-    const [movies, setMovies] = useState<MovieType[]>([]);
-
-    const getSearchedMovies = async (url: any) => {
+    const [shows, setTvShows] = useState<MovieType[]>([]);
+    const getSearchedSeries = async (url: any) => {
 
         const response = await fetch(url);
         const data = await response.json();
-        setMovies(data.results);
+        setTvShows(data.results);
     }
 
     useEffect(() => {
-        const searchWithURL = `${API_SEARCH_MOVIE_GENRE_ID}+${busca}`;
+        const searchWithURL = `${API_SEARCH_TVSHOW_GENRE_ID}${busca}`;
         console.log(searchWithURL)
-
-        getSearchedMovies(searchWithURL)
+        getSearchedSeries(searchWithURL)
 
     }, [])
 
@@ -37,17 +36,14 @@ export function BuscaDeFilmesPorGenero({ navigation, route }: { navigation: any,
                     style={styles.text}
                 >{nome}</Text>
             </View>
-            {movies.length == 0 && <LottieView
-                autoPlay
-                loop
-                style={[styles.lottieView, { top: 150 }]}
-                source={require('./../../../Components/ButtonAnimated/loading.json')}
-            />}
+            {shows.length === 0 && <Text
+                style={styles.text}
+            >Carregando...</Text>}
             <View
                 style={{ height: 680 }}
             >
-                {movies.length > 0 && movies && <MovieCard
-                    key={movies[0].id} movie={movies} />}
+                {shows.length > 0 && shows && <TvShowCard
+                    key={shows[0].id} tvShow={shows} />}
             </View>
 
 
@@ -57,10 +53,10 @@ export function BuscaDeFilmesPorGenero({ navigation, route }: { navigation: any,
                     loop
                     speed={0.5}
                     style={styles.lottieView}
-                    source={require('./../../../Components/ButtonAnimated/buttonWhite.json')}
+                    source={require('./../../Components/ButtonAnimated/buttonWhite.json')}
                 />
                 <Text
-                    onPress={() => navigation.navigate("movies")}
+                    onPress={() => navigation.navigate("tvshows")}
                     style={styles.textButton}
                 >Voltar</Text>
             </View>

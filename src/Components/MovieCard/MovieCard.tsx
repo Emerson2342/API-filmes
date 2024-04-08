@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, Text, FlatList, Modal } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons'
-
 import { styles } from './MovieCardStyles';
 import { API_IMAGE } from '../../Constants/api';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -53,9 +52,7 @@ export function MovieCard({ movie }: any) {
                             <Text
                                 style={{ color: "#000" }}
                             >{item.vote_average}</Text>
-
                         </View>
-
                     </View>
                 </View>
                 <View
@@ -66,7 +63,6 @@ export function MovieCard({ movie }: any) {
                             setModalVisible(true);
                             setIdMovie(item.id);
                             setYearMovie(yearMovie);
-
                         }}
                         style={styles.button}
                     >
@@ -87,7 +83,6 @@ export function MovieCard({ movie }: any) {
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id.toString()}
             />
-
             <Modal
                 transparent={true}
                 visible={modalVisible}

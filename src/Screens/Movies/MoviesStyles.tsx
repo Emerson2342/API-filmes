@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 30,
         backgroundColor: '#fff',
-
     },
     inputContainer: {
         flexDirection: "row",
@@ -25,7 +24,6 @@ export const styles = StyleSheet.create({
         borderWidth: 1
     },
     searchContainer: {
-        backgroundColor: "#f7d354",
         width: "20%",
         height: 30,
         alignItems: "center",
@@ -40,34 +38,42 @@ export const styles = StyleSheet.create({
         textAlign: 'center'
     },
     generosContainer: {
-        width: '95%',
+        width: '98%',
         flexDirection: 'row',
-        justifyContent: "space-around",
-        flexWrap: 'wrap'
+        justifyContent: "space-between",
+        flexWrap: 'wrap',
+        alignSelf: 'center'
     },
     generoButton: {
         backgroundColor: '#00C8BE',
-        paddingHorizontal: 10,
-        paddingVertical: 5,
-        margin: 5,
+        padding: 5,
+        marginVertical: 3,
+        marginHorizontal: 3,
+        borderRadius: 3,
+    },
+    buttonWrapper: {
+        flex: 1,
+        width: "100%",
+        alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'flex-end',
+        marginBottom: 20
+    },
+    button: {
+        backgroundColor: '#00C8BE',
+        width: '40%',
+        padding: 7,
         borderRadius: 5,
-        elevation: 10
-
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 20,
-        top: 87
     },
-    buttonWrapper: {
-        zIndex: 1,
-        top: 40,
-        width: "50%",
-        alignSelf: 'center',
-    },
+
     lottieView: {
-        position: 'absolute',
+        alignSelf: 'center',
         width: 200,
         height: 200,
     },

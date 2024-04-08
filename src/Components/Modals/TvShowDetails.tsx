@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { API_DATABASE, API_IMAGE, API_KEY, API_TVSHOW } from "../../Constants/api";
 import { MovieType, } from "../../interfaces";
+import { MotiView } from "moti";
+import LottieView from "lottie-react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export function TvShowDetails({ handleClose, id, year }: any) {
 
@@ -43,92 +46,118 @@ export function TvShowDetails({ handleClose, id, year }: any) {
             break;
     }
 
-
-
     return (
-        <View style={styles.container}>
-            <View
-                style={styles.modal}
-            >
-                <Text
-                    style={styles.title}
-                >{tvShow?.name} </Text>
-                <Text style={{ textAlign: 'center' }}>({tvShow?.original_name}, {year}-{lastYearTvShow})</Text>
-                <View
-                    style={{
-                        padding: 10,
-                    }}
+        <ScrollView style={styles.container}>
+            {tvShow ? (
+                <MotiView
+                    from={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ type: 'timing', duration: 700 }}
+                    style={styles.modal}
                 >
+                    <Text
+                        style={styles.title}
+                    >{tvShow?.name} </Text>
+                    <Text style={{ textAlign: 'center' }}>({tvShow?.original_name}, {year}-{lastYearTvShow})</Text>
                     <View
                         style={{
-                            flexDirection: 'row',
-                            justifyContent: "space-between"
+                            padding: 10,
                         }}
                     >
-                        <View>
-                            <Text>Temporadas: {tvShow?.number_of_seasons}</Text>
-                            <Text>Episódios: {tvShow?.number_of_episodes}</Text>
-
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                justifyContent: "space-between"
+                            }}
+                        >
+                            <View>
+                                <Text>Temporadas: {tvShow?.number_of_seasons}</Text>
+                                <Text>Episódios: {tvShow?.number_of_episodes}</Text>
+                            </View>
+                            <View style={{ alignItems: "flex-end" }}>
+                                <Text>Duração: {tvShow?.episode_run_time} min</Text>
+                                <Text>Status: {statusTvShow}</Text>
+                            </View>
                         </View>
-                        <View style={{ alignItems: "flex-end" }}>
-                            <Text>Duração: {tvShow?.episode_run_time} min</Text>
-                            <Text>Status: {statusTvShow}</Text>
-
-                        </View>
+                        <Text>Gêneros: {tvShow && tvShow.genres.map((genre, index) => (
+                            <Text key={index}>{index > 0 ? ', ' : ''}{genre.name}</Text>
+                        ))}</Text>
                     </View>
-                    <Text>Gêneros: {tvShow && tvShow.genres.map((genre, index) => (
-                        <Text key={index}>{index > 0 ? ', ' : ''}{genre.name}</Text>
-                    ))}</Text>
-                </View>
+                    <Image
+                        style={styles.imagePoster}
+                        src={API_IMAGE + tvShow?.poster_path}
+                    />
 
+                    {tvShow?.tagline ? (<Text
+                        style={{ textAlign: "center", padding: 10, fontStyle: 'italic' }}
+                    >"{tvShow?.tagline}"</Text>) : <></>}
 
-                <Image
-                    style={styles.imagePoster}
-                    src={API_IMAGE + tvShow?.poster_path}
-                />
-                <Text
-                    style={{ textAlign: "center", padding: 10, fontStyle: 'italic' }}
-                >"{tvShow?.tagline}"</Text>
+                    <Text
+                        style={{ textAlign: 'justify', padding: 10 }}
+                    >{tvShow?.overview}</Text>
 
-                <Text
-                    style={{ textAlign: 'justify', padding: 10 }}
-                >{tvShow?.overview}</Text>
-                <View
-                    style={styles.buttonContainer}
-                >
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={handleClose}
+                    <Text
+                        style={{ textAlign: 'justify', padding: 10 }}
+                    >{tvShow?.overview}</Text>
+                    <View
+                        style={styles.buttonContainer}
                     >
-                        <Text
-                            style={styles.textButton}
-                        >Fechar</Text>
-                    </TouchableOpacity>
-                </View>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={handleClose}
+                        >
+                            <Text
+                                style={styles.textButton}
+                            >Fechar</Text>
+                        </TouchableOpacity>
+                    </View>
+                </MotiView>
 
-            </View>
-
-
-        </View >
-
+            ) : <View
+                style={styles.loading}
+            >
+                <LottieView
+                    autoPlay
+                    loop
+                    style={styles.lottieView}
+                    source={require('./../../Components/ButtonAnimated/loading.json')}
+                />
+                <TouchableOpacity
+                    style={[styles.button, { top: 200 }]}
+                    onPress={handleClose}
+                >
+                    <Text
+                        style={styles.textButton}
+                    >Voltar</Text>
+                </TouchableOpacity>
+            </View>}
+        </ScrollView >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "rgba(0,0,0,0.7)"
+        alignContent: 'center',
+        backgroundColor: "rgba(0,0,0,0.7)",
+        padding: 30,
+        height: "100%"
     },
     modal: {
+        flex: 1,
         backgroundColor: "rgb(0, 150, 150)",
-        width: "90%",
-        height: 'auto',
+        width: "100%",
         padding: 5,
+        marginBottom: 50,
         borderRadius: 9,
         borderWidth: 1,
         borderColor: "#fff"
+    },
+    loading: {
+        height: 500,
+        marginTop: 250,
+        width: "80%",
+        alignSelf: 'center',
+        alignItems: 'center'
     },
     title: {
         fontSize: 20,
@@ -137,7 +166,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         justifyContent: "flex-end",
-        alignItems: "center"
+        alignItems: "center",
     },
     imagePoster: {
         width: 130,
@@ -146,6 +175,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     button: {
+        justifyContent: 'flex-end',
         margin: 20,
         padding: 5,
         backgroundColor: "#fff",
@@ -157,5 +187,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
-    }
+    },
+    lottieView: {
+        width: 200,
+        height: 200,
+    },
 })

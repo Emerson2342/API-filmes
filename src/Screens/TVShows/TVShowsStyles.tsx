@@ -3,21 +3,18 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         paddingTop: 30,
         backgroundColor: '#fff',
-
     },
     inputContainer: {
         flexDirection: "row",
-        justifyContent: "space-around",
-        width: '90%',
-        alignSelf: 'flex-end',
+        width: '95%',
+        alignSelf: 'center',
         margin: '5%',
     },
     input: {
         backgroundColor: "#fff",
-        width: '75%',
+        width: '95%',
         height: 30,
         padding: 1,
         borderRadius: 5,
@@ -26,7 +23,6 @@ export const styles = StyleSheet.create({
         borderWidth: 1
     },
     searchContainer: {
-        backgroundColor: "#f7d354",
         width: "20%",
         height: 30,
         alignItems: "center",
@@ -37,16 +33,27 @@ export const styles = StyleSheet.create({
     textTitle: {
         top: -20,
         fontSize: 30,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        paddingLeft: 10
+    },
+    generosContainer: {
+        width: '98%',
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        flexWrap: 'wrap',
+        alignSelf: 'center'
+    },
+    generoButton: {
+        backgroundColor: '#00C8BE',
+        padding: 5,
+        marginVertical: 5,
+        borderRadius: 5,
     },
     buttonContainer: {
-
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
         backgroundColor: '#00C8BE',
-        padding: 10
     },
     button: {
         backgroundColor: "#fff",
@@ -54,11 +61,22 @@ export const styles = StyleSheet.create({
         width: "40%",
         borderRadius: 5,
         borderWidth: 1,
-
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
-        fontSize: 20
-    }
+        fontSize: 20,
+        top: 87
+    },
+    buttonWrapper: {
+        top: 40,
+        zIndex: 1,
+        width: "50%",
+        alignSelf: 'center',
+    },
+    lottieView: {
+        position: 'absolute',
+        width: 200,
+        height: 200,
+    },
 });

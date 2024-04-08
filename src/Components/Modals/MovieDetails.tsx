@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
-import { API_DATABASE, API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
+import { API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
 import { MovieType } from "../../interfaces";
+import { MotiView } from "moti";
+import LottieView from "lottie-react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { useListaContext } from "../../Hooks/ListProvider";
 
 export function MovieDetails({ handleClose, id, year }: any) {
 
     const [movie, setMovie] = useState<MovieType | null>(null);
+
+    const { listaFilme, setListaFilme } = useListaContext();
 
     const getMovie = async (url: any) => {
         const res = await fetch(url);
@@ -17,17 +23,46 @@ export function MovieDetails({ handleClose, id, year }: any) {
         const movieURL = `${API_SEARCH_MOVIE_ID}${id}?${API_KEY}&language=pt-BR`
         getMovie(movieURL)
         console.log(movieURL)
-        console.log(JSON.stringify(movie, null, 2))
 
     }, [])
 
+    const addFilme = (filme: MovieType) => {
+
+        const filmeExistente = listaFilme.find(item => item.id === filme.id);
+        if (!filmeExistente) {
+            filme.assistido = false;
+            setListaFilme([...listaFilme, filme])
+            Alert.alert(
+                "",
+                "Filme salvo na lista!",
+                [
+                    {
+                        text: "Fechar",
+                    },
+                ]
+            );
+        } else Alert.alert(
+            "",
+            "Filme já está na lista!",
+            [
+                {
+                    text: "Fechar",
+
+                },
+            ]
+        );
+    }
 
     const formattedBudget = movie?.budget.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
     const formattedRevenue = movie?.revenue.toLocaleString('pt-BR', { style: 'currency', currency: 'USD' });
 
     return (
-        <View style={styles.container}>
-            <View
+        <ScrollView style={styles.container}>
+
+            {movie ? (<MotiView
+                from={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ type: 'timing', duration: 700 }}
                 style={styles.modal}
             >
                 <Text
@@ -46,14 +81,13 @@ export function MovieDetails({ handleClose, id, year }: any) {
                     ))}</Text>
                 </View>
 
-
                 <Image
                     style={styles.imagePoster}
                     src={API_IMAGE + movie?.poster_path}
                 />
-                <Text
+                {movie?.tagline ? (<Text
                     style={{ textAlign: "center", padding: 10, fontStyle: 'italic' }}
-                >"{movie?.tagline}"</Text>
+                >"{movie?.tagline}"</Text>) : <></>}
 
                 <Text
                     style={{ textAlign: 'justify', padding: 10 }}
@@ -63,37 +97,70 @@ export function MovieDetails({ handleClose, id, year }: any) {
                 >
                     <TouchableOpacity
                         style={styles.button}
+                        onPress={() => {
+                            addFilme(movie)
+                        }}
+                    >
+                        <Text
+                            style={styles.textButton}
+                        >Salvar na Lista</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
                         onPress={handleClose}
                     >
                         <Text
                             style={styles.textButton}
                         >Fechar</Text>
                     </TouchableOpacity>
+
                 </View>
+            </MotiView>) : <View
 
-            </View>
-
-
-        </View >
-
+                style={styles.loading}
+            >
+                <LottieView
+                    autoPlay
+                    loop
+                    style={styles.lottieView}
+                    source={require('./../../Components/ButtonAnimated/loading.json')}
+                />
+                <TouchableOpacity
+                    style={[styles.button, { top: 200 }]}
+                    onPress={handleClose}
+                >
+                    <Text
+                        style={styles.textButton}
+                    >Voltar</Text>
+                </TouchableOpacity>
+            </View>}
+        </ScrollView >
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "rgba(0,0,0,0.7)"
+        alignContent: 'center',
+        backgroundColor: "rgba(0,0,0,0.7)",
+        padding: 30,
+        height: "100%"
     },
     modal: {
+        flex: 1,
         backgroundColor: "rgb(0, 150, 150)",
-        width: "90%",
-        height: 'auto',
+        width: "100%",
         padding: 5,
+        marginBottom: 50,
         borderRadius: 9,
         borderWidth: 1,
         borderColor: "#fff"
+    },
+    loading: {
+        height: 600,
+        marginTop: 250,
+        width: "80%",
+        alignSelf: 'center',
+        alignItems: 'center'
     },
     title: {
         fontSize: 20,
@@ -111,7 +178,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     button: {
-        margin: 20,
+        marginVertical: 10,
         padding: 5,
         backgroundColor: "#fff",
         width: '60%',
@@ -122,5 +189,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'
-    }
+    },
+    lottieView: {
+        width: 200,
+        height: 200,
+    },
 })

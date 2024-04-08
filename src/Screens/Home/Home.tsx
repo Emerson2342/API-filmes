@@ -5,9 +5,10 @@ import { MovieType } from '../../interfaces';
 import { API_IMAGE, API_LAST_MOVIES_OF_YEAR, API_LAST_TVSHOW_OF_YEAR } from '../../Constants/api';
 import { MovieDetails } from '../../Components/Modals/MovieDetails';
 import { TvShowDetails } from '../../Components/Modals/TvShowDetails';
-import { WaveTop, WaveTop2 } from '../../Components/CustomLines/Wave';
+import { WaveTop } from '../../Components/CustomLines/Wave';
 import { MotiView } from 'moti';
 import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 export function Home({ navigation }: any) {
 
@@ -44,8 +45,6 @@ export function Home({ navigation }: any) {
 
     }, [])
 
-
-
     return (
         <View style={styles.container}>
             <View
@@ -55,30 +54,16 @@ export function Home({ navigation }: any) {
                     translucent={true}
                     backgroundColor={'transparent'}
                     barStyle={'dark-content'}
-
                 />
-                <MotiView
-                    from={{ translateY: -200, opacity: 0 }}
-                    animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 2500 }}
-                >
-                    <View
-                        style={{ top: 50 }}
-                    ><WaveTop />
-                    </View>
-                </MotiView>
-                <MotiView
-                    style={{ top: 430 }}
-                    from={{ translateY: -200, opacity: 0 }}
-                    animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 2500 }}
-                >
-                    <View
-                    ><WaveTop2 />
-                    </View>
-                </MotiView>
-                <MotiView
 
+                <Animatable.View
+                    animation={'slideInDown'}
+                    duration={3000}
+
+                ><WaveTop />
+                </Animatable.View>
+
+                <MotiView
                     from={{ translateY: -200, opacity: 0 }}
                     animate={{ translateY: 0, opacity: 1 }}
                     transition={{ type: 'timing', duration: 2500 }}
@@ -107,44 +92,38 @@ export function Home({ navigation }: any) {
                             const year = releaseDate.split("-")[0];
 
                             return (
-                                <View
+                                <Animatable.View
                                     key={movie.id}
-                                    style={{ width: 110, paddingLeft: 5, paddingRight: 5 }}
-
+                                    style={{ width: 150, marginLeft: 5 }}
+                                    animation={'flipInY'}
+                                    duration={3000}
+                                    delay={1000}
                                 >
-                                    <MotiView
-                                        from={{ rotateX: "-90deg", opacity: 0 }}
-                                        animate={{ rotateX: "0deg", opacity: 1 }}
-                                        transition={{ type: 'timing', duration: 2500 }}
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            setIdMovie(movie.id)
+                                            setYearMovie(year)
+                                            setModalMovieVisible(true)
+                                        }}
+
                                     >
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                setIdMovie(movie.id)
-                                                setYearMovie(year)
-                                                setModalMovieVisible(true)
-                                            }}
-                                            style={{ width: 100 }}
-                                        >
-                                            <Image
+                                        <Image
 
-                                                style={styles.imagePoster}
-                                                source={{ uri: API_IMAGE + movie.poster_path }}
-                                            />
+                                            style={styles.imagePoster}
+                                            source={{ uri: API_IMAGE + movie.poster_path }}
+                                        />
 
-                                            <Text
-                                                style={styles.titleMovie}
-                                            >{movie.title}</Text>
-                                        </TouchableOpacity>
-                                    </MotiView>
-                                </View>
+                                        <Text
+                                            style={styles.titleMovie}
+                                        >{movie.title}</Text>
+                                    </TouchableOpacity>
+                                </Animatable.View>
                             )
                         })}
                     </ScrollView>
                 </View>
 
-                <View
-                    style={{ paddingTop: 50 }}
-                >
+                <View>
                     <MotiView
                         from={{ translateX: -300, opacity: 0 }}
                         animate={{ translateX: 90, opacity: 1 }}
@@ -163,16 +142,17 @@ export function Home({ navigation }: any) {
 
                         {popularTvShows.map(tvShow => {
 
-                            const releaseDate = tvShow.release_date || "Data indisponível";
+                            const releaseDate = tvShow.first_air_date || "Data indisponível";
                             const year = releaseDate.split("-")[0];
 
                             return (
 
-                                <MotiView
-                                    from={{ rotateX: "-90deg", }}
-                                    animate={{ rotateX: "0deg", }}
-                                    transition={{ type: 'timing', duration: 2500 }}
+                                <Animatable.View
                                     key={tvShow.id}
+                                    style={{ width: 150, marginLeft: 5 }}
+                                    animation={'flipInY'}
+                                    duration={3000}
+                                    delay={1000}
                                 >
                                     <TouchableOpacity
                                         onPress={() => {
@@ -180,7 +160,6 @@ export function Home({ navigation }: any) {
                                             setYearTvShow(year)
                                             setModalTvShowVisible(true)
                                         }}
-                                        style={{ width: 100 }}
                                     >
                                         <Image
 
@@ -191,51 +170,33 @@ export function Home({ navigation }: any) {
                                             style={styles.titleMovie}
                                         >{tvShow.name}</Text>
                                     </TouchableOpacity>
-                                </MotiView>
+                                </Animatable.View>
                             )
-
                         })}
-
                     </ScrollView>
-
                 </View>
 
-                <MotiView
-                    style={styles.buttonContainer}
-                    from={{ translateY: 200, opacity: 0 }}
-                    animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ type: 'timing', duration: 2500 }}
-                >
-                    <View style={styles.buttonWrapper}>
-                        <LottieView
-                            autoPlay
-                            loop
-                            speed={0.5}
-                            style={styles.lottieView}
-                            source={require('./../../Components/ButtonAnimated/buttonHome.json')}
-                        />
-                        <Text
-                            onPress={() => navigation.navigate("movies")}
-                            style={styles.textButton}
-                        >Filmes</Text>
-                    </View>
-                    <View style={styles.buttonWrapper}>
-                        <LottieView
-                            autoPlay
-                            loop
-                            speed={0.5}
-                            style={styles.lottieView}
-                            source={require('./../../Components/ButtonAnimated/buttonHome.json')}
-                        />
-                        <Text
-                            onPress={() => navigation.navigate("tvshows")}
-                            style={styles.textButton}
-                        >Séries</Text>
-                    </View>
-                </MotiView>
+                <Animatable.View
+                    style={styles.buttonWrapper}
+                    animation={'bounceIn'}
+                    duration={5000}
+                    delay={500}
+                ><TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("movies")}
+                ><Text
+                    style={styles.textButton}
+                >Filmes</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => navigation.navigate("tvshows")}
+                    ><Text
+                        style={styles.textButton}
+                    >Séries</Text>
+                    </TouchableOpacity>
 
-
-
+                </Animatable.View>
                 <Modal
                     transparent={true}
                     visible={modalMovieVisible}

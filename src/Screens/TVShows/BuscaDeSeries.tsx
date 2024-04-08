@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
 import { API_KEY, API_SEARCH_TVSHOW } from '../../Constants/api';
 import { MovieType } from '../../interfaces';
+import LottieView from 'lottie-react-native';
 
 
 export function BuscaDeSeries({ navigation, route }: { navigation: any, route: any }) {
@@ -27,7 +28,6 @@ export function BuscaDeSeries({ navigation, route }: { navigation: any, route: a
 
     return (
         <View style={styles.container}>
-
             <View
                 style={{ flexDirection: 'row', justifyContent: 'center' }}
             >
@@ -38,13 +38,22 @@ export function BuscaDeSeries({ navigation, route }: { navigation: any, route: a
                     style={[styles.text, { color: "#f7d354" }]}
                 >{busca}</Text>
             </View>
-            {tvShows.length === 0 && <Text
-                style={styles.text}
-            >Carregando...</Text>}
+            <View
+                style={{ height: 10 }}
+            >
+                {tvShows.length === 0 && <LottieView
+                    autoPlay
+                    loop
+                    style={styles.lottieView}
+                    source={require('./../../Components/ButtonAnimated/loading.json')}
+                />}
+            </View>
 
-            {tvShows.length > 0 && tvShows && <TvShowCard key={tvShows[0].id} tvShow={tvShows} />}
-
-
+            <View
+                style={{ height: 650 }}
+            >
+                {tvShows.length > 0 && tvShows && <TvShowCard key={tvShows[0].id} tvShow={tvShows} />}
+            </View>
             <TouchableOpacity
                 onPress={() => navigation.navigate("tvshows")}
                 style={styles.buttonContent}
@@ -63,9 +72,8 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: 40,
         alignItems: 'center',
-        backgroundColor: "rgba(0,150,150,0.5)",
+        backgroundColor: "#00C8BE",
         padding: 5,
-
     },
     text: {
         color: "#fff",
@@ -84,6 +92,9 @@ const styles = StyleSheet.create({
     textButton: {
         fontSize: 20,
         fontWeight: '500',
-
+    },
+    lottieView: {
+        width: 200,
+        height: 200
     }
 })

@@ -21,3 +21,5 @@ export const API_LAST_TVSHOW_OF_YEAR = `https://api.themoviedb.org/3/discover/tv
 export const API_POPULAR_TVSHOWS = `https://api.themoviedb.org/3/tv/top_rated?${API_KEY}&language=pt-BR&sort_by=popularity.desc`;
 
 export const API_SEARCH_MOVIE_GENRE_ID = `https://api.themoviedb.org/3/discover/movie?${API_KEY}&language=pt-BR&with_genres=`
+
+export const API_SEARCH_TVSHOW_GENRE_ID = `https://api.themoviedb.org/3/discover/tv?${API_KEY}&language=pt-BR&with_genres=`
