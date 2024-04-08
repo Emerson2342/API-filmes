@@ -131,9 +131,9 @@ export function TVShows({ navigation }: any) {
                 <Text style={{ fontStyle: 'italic', textAlign: 'center', top: 15 }}>Melhores avaliados</Text>
             </MotiView>
             <View
-                style={{ height: 279, marginTop: 20 }}
+                style={{ height: 279, marginTop: 20, alignItems: "center" }}
             >
-                {topTvShows.length === 0 && <LottieView
+                {topTvShows.length == 0 && <LottieView
                     autoPlay
                     loop
                     speed={0.5}
