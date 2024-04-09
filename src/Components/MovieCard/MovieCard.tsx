@@ -18,13 +18,13 @@ export function MovieCard({ movie }: any) {
         const relaseMovie = item.release_date;
         const yearMovie = relaseMovie.split("-")[0];
 
-        const translateX = index % 2 === 0 ? -200 : 200;
+        const translateX = index % 2 == 0 ? -150 : 150
 
         return (
             <MotiView
                 from={{ translateX: translateX, opacity: 0 }}
                 animate={{ translateX: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
+                transition={{ type: 'timing', duration: 1000 + (index * 300) }}
                 style={styles.container}
             >
                 <View style={styles.list}>
@@ -75,8 +75,7 @@ export function MovieCard({ movie }: any) {
     }
 
     return (
-        <View
-        >
+        <View>
             <FlatList
                 data={movie}
                 numColumns={2}

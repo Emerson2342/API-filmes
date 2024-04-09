@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
 import { API_DATABASE, API_IMAGE, API_KEY, API_TVSHOW } from "../../Constants/api";
 import { MovieType, } from "../../interfaces";
 import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useListaContext } from "../../Hooks/ListProvider";
 
 export function TvShowDetails({ handleClose, id, year }: any) {
+
+    const { listaSerie, setListaSerie } = useListaContext();
 
     const [tvShow, setTvShow] = useState<MovieType | null>(null);
 
@@ -23,6 +26,32 @@ export function TvShowDetails({ handleClose, id, year }: any) {
         console.log(tvShowURL)
 
     }, [])
+
+    const addSerie = (serie: MovieType) => {
+
+        const serieExistente = listaSerie.find(item => item.id === serie.id);
+        if (!serieExistente) {
+            serie.assistido = false;
+            setListaSerie([...listaSerie, serie])
+            Alert.alert(
+                "",
+                "Série salva na lista!",
+                [
+                    {
+                        text: "Fechar",
+                    },
+                ]
+            );
+        } else Alert.alert(
+            "",
+            "Série já está na lista!",
+            [
+                {
+                    text: "Fechar",
+                },
+            ]
+        );
+    }
 
     const lastAirYear = tvShow?.last_air_date || "Indisponível";
     const lastYearTvShow = lastAirYear.split("-")[0];
@@ -96,12 +125,19 @@ export function TvShowDetails({ handleClose, id, year }: any) {
                         style={{ textAlign: 'justify', padding: 10 }}
                     >{tvShow?.overview}</Text>
 
-                    <Text
-                        style={{ textAlign: 'justify', padding: 10 }}
-                    >{tvShow?.overview}</Text>
                     <View
                         style={styles.buttonContainer}
                     >
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                addSerie(tvShow)
+                            }}
+                        >
+                            <Text
+                                style={styles.textButton}
+                            >Salvar na Lista</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.button}
                             onPress={handleClose}
@@ -175,9 +211,8 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     button: {
-        justifyContent: 'flex-end',
-        margin: 20,
-        padding: 5,
+        marginVertical: 3,
+        padding: 3,
         backgroundColor: "#fff",
         width: '60%',
         borderRadius: 5,

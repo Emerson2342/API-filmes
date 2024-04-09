@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     button: {
-        marginVertical: 10,
-        padding: 5,
+        marginVertical: 3,
+        padding: 3,
         backgroundColor: "#fff",
         width: '60%',
         borderRadius: 5,

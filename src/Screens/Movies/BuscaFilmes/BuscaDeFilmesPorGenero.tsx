@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: "bold"
     },
-
     textButton: {
         textAlign: "center",
         fontWeight: "bold",

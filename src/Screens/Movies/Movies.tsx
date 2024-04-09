@@ -129,10 +129,10 @@ export function Movies({ navigation }: any) {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ type: 'timing', duration: 2000 }}
             >
-                <Text style={{ top: 15, fontStyle: 'italic', textAlign: 'center', }}>Melhores avaliados</Text>
+                <Text style={{ fontStyle: 'italic', textAlign: 'center', }}>Melhores avaliados</Text>
             </MotiView>
             <View
-                style={{ height: 279, marginTop: 20 }}
+                style={{ height: 380 }}
             >
                 {topMovies.length === 0 && <LottieView
                     autoPlay
@@ -198,24 +198,7 @@ export function Movies({ navigation }: any) {
                         style={styles.textButton}
                     >Filmes Salvos</Text>
                 </TouchableOpacity>
-
-
             </Animatable.View>
-
-
-            {/*  <MotiView
-                from={{ translateY: 200, opacity: 0 }}
-                animate={{ translateY: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
-            >
-                <WaveBottomMovies />
-                <View
-                    style={{ height: 80, backgroundColor: "#00C8BE" }}
-                />
-            </MotiView> */}
-
-
-
         </View >
     );
 }

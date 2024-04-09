@@ -178,7 +178,7 @@ export function Home({ navigation }: any) {
 
                 <Animatable.View
                     style={styles.buttonWrapper}
-                    animation={'bounceIn'}
+                    animation={'fadeIn'}
                     duration={5000}
                     delay={500}
                 ><TouchableOpacity

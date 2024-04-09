@@ -36,9 +36,12 @@ export function BuscaDeSeriesPorGenero({ navigation, route }: { navigation: any,
                     style={styles.text}
                 >{nome}</Text>
             </View>
-            {shows.length === 0 && <Text
-                style={styles.text}
-            >Carregando...</Text>}
+            {shows.length == 0 && <LottieView
+                autoPlay
+                loop
+                style={[styles.lottieView, { top: 150 }]}
+                source={require('./../../Components/ButtonAnimated/loading.json')}
+            />}
             <View
                 style={{ height: 680 }}
             >

@@ -6,9 +6,10 @@ import { API_POPULAR_TVSHOWS } from '../../Constants/api';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { MovieType } from '../../interfaces';
 import { TvShowCard } from '../../Components/TvShowCard/TvShowCard';
-import { WaveBottomMovies, WaveTop } from '../../Components/CustomLines/Wave';
+import { WaveTop } from '../../Components/CustomLines/Wave';
 import { MotiView } from 'moti';
 import LottieView from 'lottie-react-native';
+import * as Animatable from 'react-native-animatable';
 
 export function TVShows({ navigation }: any) {
 
@@ -128,10 +129,10 @@ export function TVShows({ navigation }: any) {
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ type: 'timing', duration: 2000 }}
             >
-                <Text style={{ fontStyle: 'italic', textAlign: 'center', top: 15 }}>Melhores avaliados</Text>
+                <Text style={{ fontStyle: 'italic', textAlign: 'center' }}>Melhores avaliadas</Text>
             </MotiView>
             <View
-                style={{ height: 279, marginTop: 20, alignItems: "center" }}
+                style={{ height: 370, alignItems: "center" }}
             >
                 {topTvShows.length == 0 && <LottieView
                     autoPlay
@@ -174,34 +175,31 @@ export function TVShows({ navigation }: any) {
                     </MotiView>
                 ))}
             </View>
-            <MotiView
+            <Animatable.View
                 style={styles.buttonWrapper}
-                from={{ translateX: 200, opacity: 0 }}
-                animate={{ translateX: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
+                animation={'fadeIn'}
+                duration={5000}
+                delay={500}
             >
-                <LottieView
-                    autoPlay
-                    loop
-                    speed={0.5}
-                    style={styles.lottieView}
-                    source={require('./../../Components/ButtonAnimated/buttonWhite.json')}
-                />
-                <Text
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => navigation.navigate("home")}
-                    style={styles.textButton}
-                >Voltar</Text>
-            </MotiView>
-            <MotiView
-                from={{ translateY: 200, opacity: 0 }}
-                animate={{ translateY: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
-            >
-                <WaveBottomMovies />
-                <View
-                    style={{ zIndex: -5, height: 90, backgroundColor: "#00C8BE" }}
-                />
-            </MotiView>
+                >
+                    <Text
+
+                        style={styles.textButton}
+                    >Voltar</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate("listaSeries")}
+                >
+                    <Text
+
+                        style={styles.textButton}
+                    >Séries Salvas</Text>
+                </TouchableOpacity>
+            </Animatable.View>
         </View>
     );
 }

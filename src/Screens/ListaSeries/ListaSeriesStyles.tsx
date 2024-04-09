@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         color: '#000',
     },
-    movieAverage: {
+    tvShowAverage: {
         flexDirection: 'row',
         alignItems: "center",
         justifyContent: 'center',
@@ -67,11 +67,11 @@ export const styles = StyleSheet.create({
     },
     buttonVoltar: {
         backgroundColor: '#00C8BE',
-        padding: 10,
+        padding: 7,
         width: '50%',
         alignItems: 'center',
-        borderRadius: 9,
-        bottom: 10
+        bottom: 10,
+        borderRadius: 9
     },
     textVoltar: {
         fontSize: 20,

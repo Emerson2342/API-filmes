@@ -35,7 +35,6 @@ export const styles = StyleSheet.create({
         top: -20,
         fontSize: 30,
         fontWeight: "bold",
-        textAlign: 'center'
     },
     generosContainer: {
         width: '98%',
@@ -71,7 +70,6 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 20,
     },
-
     lottieView: {
         alignSelf: 'center',
         width: 200,

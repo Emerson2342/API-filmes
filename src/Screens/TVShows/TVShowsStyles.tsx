@@ -55,24 +55,25 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#00C8BE',
     },
+    buttonWrapper: {
+        flex: 1,
+        width: "100%",
+        alignSelf: 'center',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'flex-end',
+        marginBottom: 20
+    },
     button: {
-        backgroundColor: "#fff",
-        padding: 5,
-        width: "40%",
+        backgroundColor: '#00C8BE',
+        width: '40%',
+        padding: 7,
         borderRadius: 5,
-        borderWidth: 1,
     },
     textButton: {
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 20,
-        top: 87
-    },
-    buttonWrapper: {
-        top: 40,
-        zIndex: 1,
-        width: "50%",
-        alignSelf: 'center',
     },
     lottieView: {
         position: 'absolute',

@@ -19,13 +19,13 @@ export function TvShowCard({ tvShow }: any) {
         const relaseTvShow = item.first_air_date || "Indisponível";
         const yearTvShow = relaseTvShow.split("-")[0];
 
-        const translateX = index % 2 === 0 ? -200 : 200;
+        const translateX = index % 2 == 0 ? -150 : 150
 
         return (
             <MotiView
                 from={{ translateX: translateX, opacity: 0 }}
                 animate={{ translateX: 0, opacity: 1 }}
-                transition={{ type: 'timing', duration: 2000 }}
+                transition={{ type: 'timing', duration: 1000 + (index * 300) }}
                 style={styles.container}
             >
                 <View style={styles.list}>
@@ -53,9 +53,7 @@ export function TvShowCard({ tvShow }: any) {
                             <Text
                                 style={{ color: "#000" }}
                             >{item.vote_average}</Text>
-
                         </View>
-
                     </View>
                 </View>
                 <View
@@ -66,7 +64,6 @@ export function TvShowCard({ tvShow }: any) {
                             setModalVisible(true);
                             setIdTvShow(item.id);
                             setYear(yearTvShow);
-
                         }}
                         style={styles.button}
                     >
@@ -79,8 +76,7 @@ export function TvShowCard({ tvShow }: any) {
     }
 
     return (
-        <View
-        >
+        <View>
             <FlatList
                 data={tvShow}
                 numColumns={2}
