@@ -31,13 +31,12 @@ export const styles = StyleSheet.create({
         alignSelf: "center",
     },
     subInfo: {
-        alignItems: 'center',
+        width: '75%'
     },
     textTitle: {
         margin: 1,
         fontWeight: "bold",
         textAlign: 'center',
-        flexWrap: 'wrap',
         color: '#000',
     },
     movieAverage: {

@@ -62,9 +62,11 @@ export function ListaFilmes({ navigation }: any) {
                             src={API_IMAGE + item.poster_path}
                         />
                     </View>
-                    <View>
+                    <View
+                        style={{ width: '90%', }}
+                    >
                         <View
-                            style={{ width: '80%', alignSelf: 'center' }}
+                            style={{ width: '70%', }}
                         >
                             <Text
                                 style={styles.textTitle}
@@ -75,7 +77,7 @@ export function ListaFilmes({ navigation }: any) {
                         >
                             <Text
                                 style={{
-                                    color: "#000",
+                                    color: "#000", textAlign: 'center'
                                 }}
                             > Ano:{yearMovie}</Text>
                             <View
