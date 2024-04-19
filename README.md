@@ -1,4 +1,5 @@
-
+![GIF da aplicação](https://github.com/Emerson2342/API-filmes/blob/main/Images/homeGif.gif)
+![GIF da aplicação](https://github.com/Emerson2342/API-filmes/blob/main/Images/filmesGif.gif)
 ![Página principal](https://github.com/Emerson2342/API-filmes/blob/main/Images/home.jpg)
 ![Melhores Filmes](https://github.com/Emerson2342/API-filmes/blob/main/Images/filmes.jpg)
 ![Melhores Séries](https://github.com/Emerson2342/API-filmes/blob/main/Images/series.jpg)

@@ -25,7 +25,7 @@ export function MovieCard({ movie }: any) {
                 from={{ translateX: translateX, opacity: 0 }}
                 animate={{ translateX: 0, opacity: 1 }}
                 transition={{ type: 'timing', duration: 1000 + (index * 300) }}
-                style={styles.container}
+                style={movie.length == 1 ? [styles.container, { width: '90%' }] : styles.container}
             >
                 <View style={styles.list}>
                     <Image

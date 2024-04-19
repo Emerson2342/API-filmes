@@ -33,12 +33,15 @@ export function BuscaDeFilmes({ navigation, route }: { navigation: any, route: a
             <View
                 style={{ flexDirection: 'row', justifyContent: 'center' }}
             >
-                <Text
-                    style={styles.text}
-                >Resultados para: </Text>
-                <Text
-                    style={[styles.text, { color: "#f7d354" }]}
-                >{busca}</Text>
+                <View
+                >
+                    <Text
+                        style={styles.text}
+                    >Resultados para: </Text>
+                    <Text
+                        style={[styles.text, { color: "#f7d354" }]}
+                    >{busca}</Text>
+                </View>
             </View>
             <View
                 style={{ height: 650 }}
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
     text: {
         color: "#fff",
         fontSize: 25,
+        textAlign: 'center'
     },
 
     buttonContent: {

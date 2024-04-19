@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontWeight: "bold",
         fontSize: 20,
-        top: 87
+        top: 87,
+        left: -7
     },
     buttonWrapper: {
         zIndex: -5,
