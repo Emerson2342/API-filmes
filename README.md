@@ -27,7 +27,7 @@ Este projeto utiliza dados fornecidos pela [API do TMDB](https://www.themoviedb.
 
 ### Android
 
-1. Faça o download do APK mais recente do [Aplicativo](https://github.com/Emerson2342/dota2/releases/).
+1. Faça o download do APK mais recente do [Aplicativo](https://github.com/Emerson2342/API-filmes/releases).
 2. Instale o APK no seu dispositivo Android.
 
 ### iOS
