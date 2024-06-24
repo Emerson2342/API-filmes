@@ -39,15 +39,21 @@ Atualmente não suportado.
 
 ![GIF da aplicação](Images/homeGif.gif) | ![GIF da aplicação](Images/filmesGif.gif)
 |:--:|:--:|
+
 ![Página principal](Images/home.jpg)|![Melhores Filmes](Images/filmes.jpg)
 |:--:|:--:|
+
 ![Melhores Séries](Images/series.jpg)| ![Buscar Filmes](Images/buscaFilmes.jpg)
 |:--:|:--:|
+
 ![Buscar Séries](Images/buscaSerie.jpg) | ![Detalhes Filme](Images/detalhesFilme.jpg)
 |:--:|:--:|
+
 ![Detalhes Série](Images/detalhesSerie.jpg) | ![Lista de Filmes](Images/listaFilmes.jpg)
 |:--:|:--:|
+
 ![Lista de Séries](Images/listaSeries.jpg)
+
   ## Licença
 [![License](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
 
