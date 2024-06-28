@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
-import { API_IMAGE, API_KEY, API_SEARCH_MOVIE_ID } from "../../Constants/api";
-import { MovieType } from "../../interfaces";
+import { API_IMAGE, API_KEY, API_MOVIE_CREDIT, API_SEARCH_MOVIE_ID } from "../../Constants/api";
+import { MovieCreditsType, MovieType } from "../../interfaces";
 import { MotiView } from "moti";
 import LottieView from "lottie-react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useListaContext } from "../../Hooks/ListProvider";
+import { StatusBar } from "expo-status-bar";
 
 export function MovieDetails({ handleClose, id, year }: any) {
 
     const [movie, setMovie] = useState<MovieType | null>(null);
+    const [movieCredits, setMovieCredits] = useState<MovieCreditsType | null>(null);
+    const [director, setDirector] =useState<string[]>([])
+    const [actors, setActors] = useState<string[]|null>([])
+    
 
     const { listaFilme, setListaFilme } = useListaContext();
 
@@ -17,6 +22,23 @@ export function MovieDetails({ handleClose, id, year }: any) {
         const res = await fetch(url);
         const data = await res.json();
         setMovie(data);
+
+        
+    }
+
+    const getMovieCredits = async(url:any)=>{
+        const res = await fetch(url);
+        const data: MovieCreditsType = await res.json();
+        setMovieCredits(data);
+        
+        const director = data.crew.filter(cast => cast.job == "Director").map(diretor => diretor.name);  
+        setDirector(director);
+              
+        
+
+        const actors = data.cast.slice(0,3).map(actor => actor.name);
+        setActors(actors);
+        
     }
 
     useEffect(() => {
@@ -24,7 +46,12 @@ export function MovieDetails({ handleClose, id, year }: any) {
         getMovie(movieURL)
         console.log(movieURL)
 
-    }, [])
+        const movieCreditURL = API_MOVIE_CREDIT(id);
+        getMovieCredits(movieCreditURL);
+
+        
+        console.log(movieCreditURL);          
+        }, [])
 
     const addFilme = (filme: MovieType) => {
 
@@ -58,6 +85,9 @@ export function MovieDetails({ handleClose, id, year }: any) {
 
     return (
         <ScrollView style={styles.container}>
+            <StatusBar
+            backgroundColor={"rgba(0,0,0,0.7)"}
+            />
 
             {movie ? (<MotiView
                 from={{ opacity: 0 }}
@@ -69,16 +99,29 @@ export function MovieDetails({ handleClose, id, year }: any) {
                     style={styles.title}
                 >{movie?.title} </Text>
                 <Text style={{ textAlign: 'center' }}>({movie?.original_title}, {year})</Text>
+                <View style={{justifyContent: 'center',flexDirection:'row'}}>
+                <Text style={{fontWeight:'bold'}}>Direção:</Text><Text>{director && director.map((name, index) =>(
+                    <Text key={index}>{index > 0 ? ', ': ''} {name}</Text>
+                ))}</Text></View>
                 <View
                     style={{ padding: 10 }}
-                >
-                    <Text>Orçamento: {formattedBudget}</Text>
-                    <Text>Receita: {formattedRevenue}</Text>
-
-                    <Text>Duração: {movie?.runtime} min</Text>
-                    <Text>Gêneros: {movie && movie.genres.map((genre, index) => (
+                ><View style={{flexDirection:'row'}}>
+                    <Text style={{fontWeight:"bold"}}>Orçamento:</Text><Text> {formattedBudget}</Text>
+                    </View>
+                    <View style={{flexDirection:'row'}}>
+                    <Text style={{fontWeight:"bold"}}>Receita:</Text><Text> {formattedRevenue}</Text></View>
+                    <View style={{flexDirection:'row'}}>
+                    <Text style={{fontWeight:"bold"}}>Duração:</Text><Text> {movie?.runtime} min</Text></View>
+                    <View style={{flexDirection:'row'}}>
+                    <Text style={{fontWeight:"bold"}}>Gêneros:</Text><Text> {movie && movie.genres.map((genre, index) => (
                         <Text key={index}>{index > 0 ? ', ' : ''}{genre.name}</Text>
-                    ))}</Text>
+                    ))}</Text></View>
+                    <View style={{flexDirection:'row', width:'90%'}}>
+
+                    <Text style={{fontWeight:"bold"}}>Elenco:</Text><Text>{actors && actors.map((name, index) =>(
+                        <Text key={index}>{index > 0 ? ', ': ''} {name}</Text>
+                     ))}
+                     </Text></View>
                 </View>
 
                 <Image

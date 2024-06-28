@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert, StatusBar } from "react-native";
 import { API_DATABASE, API_IMAGE, API_KEY, API_TVSHOW } from "../../Constants/api";
 import { MovieType, } from "../../interfaces";
 import { MotiView } from "moti";
@@ -77,6 +77,10 @@ export function TvShowDetails({ handleClose, id, year }: any) {
 
     return (
         <ScrollView style={styles.container}>
+            <StatusBar
+            backgroundColor={"rgba(0,0,0,0.7)"}
+            />
+
             {tvShow ? (
                 <MotiView
                     from={{ opacity: 0 }}

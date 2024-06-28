@@ -28,3 +28,13 @@ export interface MovieType {
     last_air_date: any;
     assistido: boolean;
 }
+
+export interface MovieCreditsType {
+    cast:{
+        name:string
+    }[];
+    crew:{
+        name:string;
+       job:string
+    }[]
+}
